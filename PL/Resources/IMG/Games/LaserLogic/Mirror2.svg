@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fe6d39;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #d9d9d9;
+      }
+    </style>
+  </defs>
+  <path id="Фигура_1" data-name="Фигура 1" class="cls-1" d="M400,475L250,250l-78.5-52.331L25,100l75-75L250,250,475,400"/>
+  <path id="Прямоугольник_1" data-name="Прямоугольник 1" class="cls-2" d="M197.25,171.118L328.882,302.75,302.75,328.882,171.118,197.25Z"/>
+</svg>
