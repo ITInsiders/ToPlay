@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TP.RL.Entities.Administrator" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Administrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.Comment" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QwACAAAAAAAAAKBAAAAAAAAAABABAAAAAAAgAAAIIAA=</HashCode>
+      <FileName>Entities\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.Game" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAAQAAAAAAAAAAAAQAIAAAABAAAAAAAAAAIAA=</HashCode>
+      <FileName>Entities\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.GameComment" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAEAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\GameComment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.GameGamer" Collapsed="true">
+    <Position X="8" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAEAAAAgIggAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Entities\GameGamer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.GameImage" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAEAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\GameImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.Gamer" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Gamer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.Image" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIBAAAAAAAAAACAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Entities\Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.MarkComment" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Entities\MarkComment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.Message" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwACAAAAEAIAgCAAAAAAAAAAABABAAABAAAgAQAIAAA=</HashCode>
+      <FileName>Entities\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.User" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAEgAACAAAIBAAAAQQAgAAAAQABQKAAAQAQAAAAA=</HashCode>
+      <FileName>Entities\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.UserComment" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\UserComment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TP.RL.Entities.UserImage" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\UserImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

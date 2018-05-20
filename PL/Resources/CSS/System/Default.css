@@ -1,0 +1,23 @@
+﻿/*
+body {
+    text-align: center;
+
+    &, * {
+        padding: 0;
+        margin: 0;
+        transition: .5s;
+    }
+
+    &, div, header, section, footer {
+        display: inline-block;
+        float: left;
+        width: 100%;
+        height: auto;
+    }
+
+    a {
+        text-transform: none;
+        text-decoration: none;
+    }
+}
+*/
