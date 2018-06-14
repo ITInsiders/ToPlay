@@ -6,6 +6,29 @@ button {
 }
 /**-------**/
 
+/**Scroll**/
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    height: 10px;
+    box-shadow: inset 0 0 0 2px @basecolor-darkgrayblue;
+    background-color: @basecolor-orange;
+}
+::-webkit-scrollbar-thumb:hover {
+    filter: invert(100%);
+}
+::-webkit-scrollbar-track {
+    background-color: @basecolor-darkgrayblue;
+}
+/**------**/
+
 body {
     padding: 0;
     margin: 0;

@@ -14,10 +14,12 @@ namespace TP.ML.IOEntities
         [Key]
         public long Id { get; set; }
 
-        [ForeignKey("IOGameGamer")]
-        public long IOGameGamerId { get; set; }
-        public virtual IOGameGamer IOGameGamer { get; set; }
+        [ForeignKey("IOGamingSession")]
+        public long IOGamingSessionId { get; set; }
+        public virtual IOGamingSession IOGamingSession { get; set; }
 
         public string Value { get; set; }
+
+        public virtual Answer Answer { get; set; }
     }
 }

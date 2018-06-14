@@ -21,9 +21,14 @@ namespace TP.ML.Entities
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
+        public virtual List<GameGamer> GameGamers { get; set; }
+
         public GamingSession()
         {
             this.Start = DateTime.Now;
         }
+
+        protected virtual object Child => this;
+        public T Get<T>() where T : GamingSession, new() => this.Child is T ? (T)this.Child : null;
     }
 }

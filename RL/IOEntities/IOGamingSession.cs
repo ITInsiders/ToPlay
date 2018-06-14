@@ -9,15 +9,9 @@ using TP.ML.Entities;
 
 namespace TP.ML.IOEntities
 {
-    [Table("IOGameGamers")]
-    public class IOGameGamer : GameGamer
+    [Table("IOGamingSessions")]
+    public class IOGamingSession : GamingSession
     {
-        [ForeignKey("Сharacteristic")]
-        public long СharacteristicId { get; set; }
-        public virtual Сharacteristic Сharacteristic { get; set; }
-
         public virtual List<Task> Tasks { get; set; }
-
-        protected override object Child => this;
     }
 }

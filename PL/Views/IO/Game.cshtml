@@ -6,6 +6,10 @@
 <div class="Data" data-view="@Info.View" data-controller="@Info.Controller">
     <div class="HeaderTemp">
         <div class="Info">
+            <div class="Coins">
+                <span id="Coins">0</span>
+                <span> @Info.Language.Get("coins")</span>
+            </div>
             <div class="Timer">
                 <span>@Info.Language.Get("time left"): </span>
                 <span id="Timer">60</span>
@@ -30,14 +34,25 @@
                 <span>@Info.Language.Get("will take a spider in the hand?")</span>
             </div>
         </div>
-        <div class="List col-12 row justify-content-center">
+        <div class="List Answer col-12 row justify-content-center">
             @{
-                for (int i = 0; i < 8; i++)
+                Random random = new Random();
+                for (int i = 0; i < 4; i++)
                 {
                     <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                         <div class="Gamer"
                              style="background-image: url('/Resources/IMG/Users/CEH4TOP/0.jpg')">
-                            <div class="Name"><span>CEH4TOP</span></div>
+                            @{ int k = random.Next(1, 8); int t = i + 1; }
+                            <div class="Answer">
+                                <span class="Login">CEH4TOP @k</span>
+                                <hr />
+                                <span>+</span>
+                                <span class="CountCoints">100</span>
+                                <span>@Info.Language.Get("coins")</span>
+                            </div>
+                            <div class="Name">
+                                <span class="Login">CEH4TOP @t</span>
+                            </div>
                         </div>
                     </div>
                 };

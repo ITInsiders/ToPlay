@@ -66,6 +66,7 @@
     <Compile Include="Helper\Languages.cs" />
     <Compile Include="IOEntities\Adjective.cs" />
     <Compile Include="IOEntities\Answer.cs" />
+    <Compile Include="IOEntities\IOGamingSession.cs" />
     <Compile Include="IOEntities\СharacteristicAdjective.cs" />
     <Compile Include="IOEntities\IOGameGamer.cs" />
     <Compile Include="IOEntities\Task.cs" />

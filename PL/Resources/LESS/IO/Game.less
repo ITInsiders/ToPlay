@@ -20,17 +20,9 @@
                 background-position-y: top;
                 background-repeat: no-repeat;
                 background-size: 100%;
-                cursor: pointer;
+                cursor: default;
                 overflow: hidden;
                 transition: .5s ease-in-out;
-
-                &:hover, &.Select {
-                    background-size: 150%;
-                }
-
-                &.Select {
-                    outline: 3px solid @basecolor-white;
-                }
 
                 &:before {
                     content: "";
@@ -51,11 +43,43 @@
                     border-radius: 50%;
                 }
 
-                &:hover:after, &.Select:after {
-                    top: 3%;
-                    left: 7%;
-                    width: 86%;
-                    height: 86%;
+                .Answer {
+                    position: absolute;
+                    bottom: 35px;
+                    left: 5%;
+                    min-height: 30px;
+                    width: 90%;
+                    background-color: @basecolor-white;
+                    transition: .5s;
+                    transform: scale(1, 1);
+                    border-radius: 5px;
+                    outline: 1px solid @basecolor-darkgrayblue;
+                    z-index: 3;
+
+                    &, & span {
+                        color: @basecolor-darkgrayblue;
+                    }
+
+                    .CountCoints {
+                        font-size: 25px;
+                    }
+
+                    hr {
+                        margin: 0;
+                    }
+
+                    &:before {
+                        position: absolute;
+                        content: "▼";
+                        bottom: -8px;
+                        left: calc(~"50% - 5px");
+                        font-size: 15px;
+                        height: 10px;
+                        line-height: 10px;
+                        color: @basecolor-white;
+                        text-shadow: 0 2px 0 @basecolor-darkgrayblue;
+                        transition: .5s;
+                    }
                 }
 
                 .Name {
@@ -63,6 +87,27 @@
                     left: 0;
                     bottom: 0;
                     z-index: 2;
+                }
+
+                &:hover {
+                    .Answer {
+                        background-color: @basecolor-darkgrayblue;
+                        outline: 1px solid @basecolor-white;
+                        border-radius: 0;
+
+                        hr {
+                            background-color: white;
+                        }
+
+                        &, & span {
+                            color: @basecolor-white;
+                        }
+
+                        &:before {
+                            color: @basecolor-darkgrayblue;
+                            text-shadow: 0 2px 0 @basecolor-white;
+                        }
+                    }
                 }
             }
 
@@ -74,6 +119,31 @@
 
                 span {
                     color: @basecolor-darkgrayblue;
+                }
+            }
+        }
+
+        &:not(.Answer) {
+            .Gamer {
+                cursor: pointer;
+
+                .Answer {
+                    transform: scale(0, 0);
+                }
+
+                &:hover, &.Select {
+                    background-size: 150%;
+                }
+
+                &.Select {
+                    outline: 3px solid @basecolor-white;
+                }
+
+                &:hover:after, &.Select:after {
+                    top: 3%;
+                    left: 7%;
+                    width: 86%;
+                    height: 86%;
                 }
             }
         }

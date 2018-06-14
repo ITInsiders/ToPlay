@@ -25,6 +25,13 @@ namespace TP.PL.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Result()
+        {
+            ViewBag.Info = pageInfo.setView("Result");
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Main(object Object)
         {
@@ -36,6 +43,13 @@ namespace TP.PL.Controllers
         public ActionResult Game(object Object)
         {
             ViewBag.Info = pageInfo.setView("Game").setPart(true);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Result(object Object)
+        {
+            ViewBag.Info = pageInfo.setView("Result");
             return View();
         }
     }

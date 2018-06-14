@@ -17,11 +17,11 @@ namespace TP.ML.IOEntities
 
         [ForeignKey("Sender")]
         public long? SenderId { get; set; }
-        public virtual User Sender { get; set; }
+        public virtual IOGameGamer Sender { get; set; }
         
         [ForeignKey("Recipient")]
-        public long RecipientID { get; set; }
-        public virtual User Recipient { get; set; }
+        public long? RecipientId { get; set; }
+        public virtual IOGameGamer Recipient { get; set; }
         
         [ForeignKey("Task")]
         public long TaskId { get; set; }

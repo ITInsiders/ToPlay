@@ -218,6 +218,10 @@
     <Content Include="Resources\CSS\IO\Main.min.css">
       <DependentUpon>Main.css</DependentUpon>
     </Content>
+    <Content Include="Resources\CSS\IO\Result.css" />
+    <Content Include="Resources\CSS\IO\Result.min.css">
+      <DependentUpon>Result.css</DependentUpon>
+    </Content>
     <Content Include="Resources\CSS\Layout\Home.css" />
     <Content Include="Resources\CSS\Layout\Home.min.css">
       <DependentUpon>Home.css</DependentUpon>
@@ -258,6 +262,7 @@
     <Content Include="Resources\JS\Home\Games2.js" />
     <Content Include="Resources\JS\IO\Game.js" />
     <Content Include="Resources\JS\IO\Main.js" />
+    <Content Include="Resources\JS\IO\Result.js" />
     <Content Include="Resources\JS\Layout\Home.js" />
     <Content Include="Resources\IMG\System\ToPlayFox.psd" />
     <Content Include="Resources\Fonts\BebasNeueBold.otf" />
@@ -321,6 +326,7 @@
     <Content Include="Resources\LESS\IO\Main.less" />
     <Content Include="Resources\LESS\Layout\IO.less" />
     <Content Include="Resources\LESS\IO\Game.less" />
+    <Content Include="Resources\LESS\IO\Result.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Resources\JS\Home\Games.js" />
     <Content Include="Scripts\jcanvas.min.js" />
@@ -374,6 +380,7 @@
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\LF\Main.cshtml" />
     <Content Include="Views\IO\Game.cshtml" />
+    <Content Include="Views\IO\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,55 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info = (PageInfo)ViewBag.Info;
+    Layout = Info.LayoutHref;
+}
+<div class="Data" data-view="@Info.View" data-controller="@Info.Controller">
+    <div class="HeaderTemp">
+        <div class="Info">
+            <div class="Coins">
+                <span id="Coins">0</span>
+                <span> @Info.Language.Get("coins")</span>
+            </div>
+        </div>
+        <div class="Buttons">
+            <button type="button" class="Exit">
+                <span>@Info.Language.Get("exit")</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="Gaming container">
+    <div class="row">
+        <div class="Line col-12">
+            <div class="Title">
+                <span>@Info.Language.Get("result")</span>
+            </div>
+        </div>
+        <div class="List Answer col-12 row justify-content-center">
+            @{
+                for (int i = 1; i <= 8; i++)
+                {
+                    <div class="Element col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <div class="Gamer"
+                             style="background-image: url('/Resources/IMG/Users/CEH4TOP/0.jpg')">
+                            <div class="Seat">
+                                <span>@i</span>
+                            </div>
+                            <div class="Characteristic">
+                                <div class="Title">
+                                    <span>@Info.Language.Get("characteristic")</span>
+                                </div>
+                                <div class="Text">
+                                    <span>@Info.Language.Get("well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player! well player!")</span>
+                                </div>
+                            </div>
+                            <div class="Name">
+                                <span class="Login">CEH4TOP @i</span>
+                            </div>
+                        </div>
+                    </div>
+                };
+            }
+        </div>
+    </div>
+</div>
