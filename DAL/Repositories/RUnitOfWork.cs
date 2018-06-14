@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TP.DAL.Interfaces;
-using TP.RL.Entities;
+using TP.ML.Entities;
 
 namespace TP.DAL.Repositories
 {
@@ -61,6 +61,10 @@ namespace TP.DAL.Repositories
         private Repository<MarkComment> MarkCommentRepository;
         public IRepository<MarkComment> MarkComments =>
             MarkCommentRepository ?? (MarkCommentRepository = new Repository<MarkComment>(this.DB));
+
+        private Repository<SystemName> SystemNameRepository;
+        public IRepository<SystemName> SystemNames =>
+            SystemNameRepository ?? (SystemNameRepository = new Repository<SystemName>(this.DB));
 
         public IRepository<T> Set<T>() where T : class, new() => new Repository<T>(this.DB);
 

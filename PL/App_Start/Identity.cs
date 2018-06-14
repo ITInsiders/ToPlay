@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TP.RL.Entities;
+using TP.ML.Entities;
 using TP.BL.Services;
 using TP.BL.Extensions;
 
@@ -15,14 +15,14 @@ namespace TP
 
         public Identity()
         {
-           this.User = null;
+           Check(HC.Request.Cookies["_usk"]?.Value);
         }
 
         private bool Check(string Key, string Password)
         {
             this.User = Service<User>.I
                 .Get(x => x.Login == Key || x.PhoneNumber == Key || x.Email == Key)
-                .FirstOrDefault(x => Hash.Confirm(Hash.TypeHash.SHA512, Password, x.Password, Hash.GenerateSalt(x.Login)));
+                .FirstOrDefault(x => Password == x.Password);
 
             return User != null;
         }
@@ -62,6 +62,7 @@ namespace TP
 
                 return true;
             }
+
             else return false;
         }
 

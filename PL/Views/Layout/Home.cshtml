@@ -1,17 +1,75 @@
-﻿@{
-    Identity Identity = new Identity();
-    bool isAuthentication = Identity.isAuthentication;
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info  = (PageInfo)ViewBag.Info;
+    if (Info.isPart) { @RenderBody() return; }
 }
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" href="~/Resources/IMG/System/Fox50.png" type="image/png">
-    <title>Home</title>
+    <link rel="shortcut icon" href="~/Images/System/ToPlayFox_50px.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Info.Title</title>
+    @Styles.Render("~/bundles/DefaultStyles")
+    @Styles.Render(Info.StyleController)
+    @Styles.Render(Info.StyleView)
+    @RenderSection("Styles", required: false)
 </head>
 <body>
-    <div>
+    <header class="Header">
+        <div class="Stars"><canvas id="HeaderStars"></canvas></div>
+        <div class="InfoBlock">
+            <div class="Message Left">Welcome to us...</div>
+            @if (Info.Identity.isAuthentication)
+            {
+                <div class="Message Right">
+                    @Info.Identity.User.Login
+                    <div class="ModalBlock">
+                        <div class="Photo"></div>
+                        <div class="Title Space"></div>
+                        <div class="Title">Профиль</div>
+                        <a class="Title" href="Exit">Выход</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="Message Right">
+                    player
+                    <div class="ModalBlock">
+                        <div class="Photo"></div>
+                        <div class="Title Space"></div>
+                        <div class="Title" onclick="Frame('/Entry');">Войти</div>
+                        <div class="Title" onclick="Frame('/Registration');">Регистрация</div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="FixedBlock">
+            <div class="Lable">
+                <div class="Title">TO</div>
+                <div class="Title">PLAY</div>
+            </div>
+            <div class="Menu">
+                <a class="Title MenuHome" href="Main">Главная</a>
+                <a class="Title MenuGames" href="Games">Игры</a>
+            </div>
+        </div>
+    </header>
+    <section class="Section container">
+        @RenderBody()
+    </section>
+    <footer class="Footer">
+        <div class="Stars"><canvas id="FooterStars"></canvas></div>
+    </footer>
+    <div class="BlackFrame" onclick="Frame();">
+        <iframe class="Frame"></iframe>
     </div>
+    @Scripts.Render("~/bundles/DefaultScripts")
+    @Scripts.Render("~/Resources/JS/Constellation.js")
+    @Scripts.Render(Info.ScriptController)
+    @Scripts.Render(Info.ScriptView)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

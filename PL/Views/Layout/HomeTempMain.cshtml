@@ -1,0 +1,43 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info  = (PageInfo)ViewBag.Info;
+    if (Info.isPart) { @RenderBody() return; }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Resources/IMG/System/Fox50.png" type="image/png">
+    <title>@Info.Title</title>
+    @Styles.Render("~/bundles/DefaultStyles")
+    @Styles.Render(Info.StyleController)
+    @Styles.Render(Info.StyleView)
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    @{ string UserName = (Info.Identity.isAuthentication) ? Info.Identity.User.Login : Info.Language.Get("player"); }
+    <header>
+        <div class="Header">
+            <div class="Line Left"></div>
+            <div class="Line Center">
+                <div class="Block">
+                    <a class="Item" href="/Main">@Info.Language.Get("main")</a>
+                    <a class="Item" href="/Games">@Info.Language.Get("games")</a>
+                    <a class="Item" href="/Help">@Info.Language.Get("help")</a>
+                    <a class="Item" href="/About">@Info.Language.Get("about us")</a>
+                </div>
+            </div>
+            <div class="Line Right"></div>
+        </div>
+    </header>
+    @RenderBody()
+    <footer>
+    </footer>
+    @Scripts.Render("~/bundles/DefaultScripts")
+    @Scripts.Render("~/Resources/JS/Constellation.js")
+    @Scripts.Render(Info.ScriptController)
+    @Scripts.Render(Info.ScriptView)
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

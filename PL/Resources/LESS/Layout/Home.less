@@ -1,0 +1,68 @@
+﻿@import "../System/Variables.less";
+
+body {
+    background-color: @basecolor-grayblue;
+
+    header {
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        top: 0;
+        left: 0;
+
+        &, * {
+            display: inline-block;
+            float: left;
+            width: 100%;
+        }
+
+        .Header {
+            height: 50px;
+            line-height: 50px;
+
+            .Line {
+                float: left;
+                height: 100%;
+
+
+                &.Left {
+                    width: 20%;
+                }
+
+                &.Center {
+                    width: 60%;
+                }
+
+                &.Right {
+                    width: 20%;
+                }
+
+                .Block {
+                    display: inline-block;
+                    float: none;
+                }
+            }
+
+            .Item {
+                float: left;
+                display: inline-block;
+                width: auto;
+                text-transform: uppercase;
+                text-decoration: none;
+                vertical-align: middle;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 0 15px;
+                background-color: @basecolor-grayblue;
+                box-shadow: inset 0 -2px 0 0 @basecolor-darkgrayblue;
+                transition: all .5s;
+            }
+
+            .Item:hover {
+                box-shadow: inset 0 -40px 0 0 @basecolor-darkgrayblue;
+                color: @basecolor-orange;
+            }
+        }
+    }
+}

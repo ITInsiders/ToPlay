@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("GameComments")]
     public class GameComment : Comment

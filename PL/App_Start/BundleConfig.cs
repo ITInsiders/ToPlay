@@ -8,21 +8,24 @@ namespace TP
         // Дополнительные сведения об объединении см. на странице https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/bundles/SystemStyles").Include(
-                "~/Resources/CSS/System/Default.css",
-                "~/Resources/CSS/Fonts.css"
+            bundles.Add(new StyleBundle("~/bundles/DefaultStyles").Include(
+                "~/Resources/CSS/System/Default.min.css",
+                "~/Resources/CSS/Fonts.css",
+                "~/Content/bootstrap.min.css"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/SystemScripts").Include(
-                "~/Scripts/jquery-3.1.1.min.js",
+            bundles.Add(new ScriptBundle("~/bundles/DefaultScripts").Include(
+                "~/Scripts/jquery-3.3.1.min.js",
+                "~/Scripts/bootstrap.bundle.min.js",
                 "~/Scripts/jcanvas.min.js",
-                "~/Scripts/jquery.signalR-2.2.3.min.js"
+                "~/Scripts/jquery.signalR-2.2.3.min.js",
+                "~/Resources/JS/System/Default.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/SystemValidate").Include(
-                        "~/Scripts/jquery.validate.min.js",
-                        "~/Scripts/jquery.validate.unobtrusive.min.js"
-                        ));
+            bundles.Add(new ScriptBundle("~/bundles/DefaultValidate").Include(
+                "~/Scripts/jquery.validate.min.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js"
+                ));
         }
     }
 }

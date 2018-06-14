@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("Images")]
     public class Image
@@ -26,8 +26,7 @@ namespace TP.RL.Entities
             this.Main = false;
         }
 
-        [ForeignKey("Id")]
-        protected virtual object Child { get; set; }
+        protected virtual object Child => this;
         public T Get<T>() where T : Image, new() => Child is T ? (T)Child : null;
     }
 }

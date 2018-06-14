@@ -1,23 +1,213 @@
-﻿/*
+﻿@import "Variables.less";
+
+/**Default**/
+button {
+    cursor: pointer;
+}
+/**-------**/
+
 body {
+    padding: 0;
+    margin: 0;
+
     text-align: center;
+    color: @basecolor-darkgrayblue;
+}
 
-    &, * {
-        padding: 0;
-        margin: 0;
-        transition: .5s;
-    }
+body, header, section, footer {
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
 
-    &, div, header, section, footer {
+.line {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.inline {
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: @basecolor-darkgrayblue;
+    cursor: pointer !important;
+}
+
+.BackLayout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.TextLeft {
+    text-align: left;
+}
+
+.TextCenter {
+    text-align: center;
+}
+
+.TextRight {
+    text-align: right;
+}
+
+.Block {
+    position: relative;
+    margin-top: 16px;
+    outline: 3px solid @basecolor-white;
+    padding: 20px 10px 5px 10px;
+
+    .Title {
+        position: absolute;
+        top: -16px;
+        left: 12px;
+        width: auto;
         display: inline-block;
         float: left;
-        width: 100%;
-        height: auto;
+        outline: 3px solid @basecolor-white;
+        background: @basecolor-orange;
+        overflow: hidden;
+        padding: 5px 10px;
+        height: 30px;
+        line-height: 20px;
+
+        span {
+            position: relative;
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: @basecolor-darkgrayblue;
+            transition: .5s ease-in-out;
+        }
     }
 
-    a {
-        text-transform: none;
-        text-decoration: none;
+    &:hover .Title:before {
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
     }
 }
-*/
+
+/* Select */
+
+.CustomSelect {
+    position: relative;
+    display: inline-block;
+    min-height: 100%;
+    width: auto;
+    color: @basecolor-grayblue;
+    z-index: 100;
+
+    .Value, .Option {
+        cursor: pointer;
+
+        span {
+            display: none;
+        }
+    }
+
+    .Value {
+        padding: 0 20px;
+        cursor: default;
+    }
+
+    .List {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        width: 100%;
+        background-color: @basecolor-darkgrayblue;
+    }
+
+    &.Show, &:hover {
+        .Value, .Option {
+            span {
+                display: inline-block;
+            }
+        }
+
+        .List {
+            display: inline-block;
+
+            .Option {
+                display: inline-block;
+                float: left;
+                width: 100%;
+                text-align: center;
+
+                &:hover {
+                    color: @basecolor-orange;
+                }
+            }
+        }
+    }
+}
+
+
+/* Add bootstraps */
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: initial !important;
+}
+
+@media (min-width: 576px) {
+    .hidden-sm {
+        display: none !important;
+    }
+
+    .visible-sm {
+        display: initial !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .hidden-md {
+        display: none !important;
+    }
+
+    .visible-md {
+        display: initial !important;
+    }
+}
+
+@media (min-width: 792px) {
+    .hidden-lg {
+        display: none !important;
+    }
+
+    .visible-lg {
+        display: initial !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hidden-xl {
+        display: none !important;
+    }
+
+    .visible-xl {
+        display: initial !important;
+    }
+}

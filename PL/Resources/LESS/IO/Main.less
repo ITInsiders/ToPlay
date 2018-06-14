@@ -1,0 +1,79 @@
+﻿@import "../System/Variables.less";
+
+.container.Waiting {
+    .Case {
+        margin-top: 15px;
+
+        .Block {
+            padding: 20px 15px 5px 15px;
+        }
+
+        .List {
+            padding: 0 4px;
+
+            .Element {
+                padding: 0 5px;
+                margin: 5px 0;
+
+                .Gamer {
+                    position: relative;
+                    background-color: @basecolor-orange;
+                    background-position-x: center;
+                    background-position-y: top;
+                    background-repeat: no-repeat;
+                    background-size: 100%;
+                    overflow: hidden;
+                    transition: .5s ease-in-out;
+
+                    &:hover {
+                        background-size: 150%;
+                    }
+
+                    &:before {
+                        content: "";
+                        display: block;
+                        padding-top: 100%;
+                    }
+
+                    &:after {
+                        position: absolute;
+                        top: -50%;
+                        left: -50%;
+                        content: "";
+                        display: block;
+                        width: 200%;
+                        height: 200%;
+                        transition: .5s ease-in-out;
+                        box-shadow: 0 0 0 500px @basecolor-orange;
+                        border-radius: 50%;
+                    }
+
+                    &:hover:after, &.Select:after {
+                        top: 3%;
+                        left: 7%;
+                        width: 86%;
+                        height: 86%;
+                    }
+
+                    .Name {
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        z-index: 2;
+                    }
+                }
+
+                .Name {
+                    width: 100%;
+                    min-height: 25px;
+                    line-height: 25px;
+                    background-color: @basecolor-white;
+
+                    span {
+                        color: @basecolor-darkgrayblue;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,18 +1,31 @@
-﻿function Constellation(canvas) {
+﻿var mousePosition = {};
+mousePosition.x = 0;
+mousePosition.y = 0;
+
+$(window).mousemove(function (event) {
+    mousePosition.x = event.pageX;
+    mousePosition.y = event.pageY;
+});
+
+function Constellation(canvas) {
     var _this = this,
         context = canvas.getContext('2d'),
         config = {
             star: {
-                color: 'rgba(46, 45, 62, .98)',
+                color: '#2e2d3e',
                 width: 2
             },
             line: {
-                color: 'rgba(46, 45, 62, .98)',
+                color: '#2e2d3e',
                 width: 0.8
             },
+            left: () => { return config.canvasposition.left; },
+            right: () => { return config.canvasposition.left + config.width; },
+            top: () => { return config.canvasposition.top; },
+            bottom: () => { return config.canvasposition.top + config.height; },
             position: {
-                x: 0,
-                y: 0
+                x: () => { return mousePosition.x - config.left(); },
+                y: () => { return mousePosition.y - config.top(); },
             },
             width: window.innerWidth,
             height: window.innerHeight,
@@ -21,16 +34,16 @@
                 left: 0
             },
             flag: false,
-            length: (canvas.width * canvas.height) / 1250,//Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2)) / 5,
+            length: (canvas.width * canvas.height) / 1250,
             distance: 25,
             radius: 50,
             stars: []
         };
 
     this.addconfig = function (Config) {
+        console.log(Config);
         config.star = (Config.star) ? Config.star : config.star;
         config.line = (Config.line) ? Config.line : config.line;
-        config.position = (Config.position) ? Config.position : config.position;
         config.width = (Config.width) ? Config.width : config.width;
         config.height = (Config.height) ? Config.height : config.height;
         config.length = (Config.length) ? Config.length : config.length;
@@ -82,6 +95,12 @@
         for (i = 0; i < length; i++) {
             iStar = config.stars[i];
             context.beginPath();
+            var mouseInCanvase = (
+                Math.abs(iStar.x - config.position.x()) < config.radius && Math.abs(iStar.y - config.position.y()) < config.radius
+                && config.position.x() > 0 && config.position.x() < config.width
+                && config.position.y() > 0 && config.position.y() < config.height
+            );
+
             for (j = i + 1; j < length; j++) {
                 jStar = config.stars[j];
 
@@ -90,17 +109,20 @@
                     context.lineTo(jStar.x, jStar.y);
                 }
                 else if (
-                    Math.abs(iStar.x - config.position.x) < config.radius && Math.abs(iStar.y - config.position.y) < config.radius
+                    mouseInCanvase &&
+                    Math.abs(iStar.x - config.position.x()) < config.radius && Math.abs(iStar.y - config.position.y()) < config.radius
                     && Math.abs(iStar.x - jStar.x) < config.distance * 2 && Math.abs(iStar.y - jStar.y) < config.distance * 2
                 ) {
                     context.moveTo(iStar.x, iStar.y);
                     context.lineTo(jStar.x, jStar.y);
                 }
             }
-            if (Math.abs(iStar.x - config.position.x) < config.radius && Math.abs(iStar.y - config.position.y) < config.radius) {
+
+            if (mouseInCanvase) {
                 context.moveTo(iStar.x, iStar.y);
-                context.lineTo(config.position.x, config.position.y);
+                context.lineTo(config.position.x(), config.position.y());
             }
+
             context.stroke();
             context.closePath();
         }
@@ -142,18 +164,10 @@
         });
     };
 
-    this.bind = function () {
-        $(window).mousemove(function (event) {
-            config.position.x = event.pageX - config.canvasposition.left;
-            config.position.y = event.pageY - config.canvasposition.top;
-        });
-    };
-
     this.init = function () {
         this.setCanvas();
         this.setContext();
         this.CreateStarsArray();
         this.loop(this.createStars);
-        this.bind();
     };
 }

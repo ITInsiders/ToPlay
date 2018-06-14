@@ -1,0 +1,193 @@
+﻿@import "../System/Variables.less";
+
+body {
+    font-family: @font-RussoOne;
+    background: @basecolor-darkgrayblue;
+    cursor: default;
+
+    span {
+        text-transform: uppercase;
+        color: @basecolor-white;
+    }
+
+    header {
+        border-bottom: 3px solid @basecolor-orange;
+
+        .Header {
+
+            .Left, .Right {
+                display: inline-block;
+                float: none;
+                width: auto;
+                height: auto;
+                padding: 10px 0;
+            }
+
+            .Right {
+                padding: 5px 0;
+            }
+
+            .Title {
+                display: inline-block;
+                float: left;
+                height: 30px;
+
+                .Logo, .Name {
+                    display: inline-block;
+                    float: left;
+                    width: auto;
+                }
+
+                .Logo {
+                    margin: -5px 0;
+                    height: 40px;
+                }
+
+                .Name {
+                    height: 40px;
+                    margin-left: 5px;
+
+                    .Line {
+                        line-height: 15px;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .Info {
+                display: inline-block;
+
+                div {
+                    position: relative;
+                    display: inline-block;
+                    float: left;
+                    height: 30px;
+                    line-height: 20px;
+                    padding: 5px 10px;
+                    margin: 5px 0;
+                    outline: 3px solid @basecolor-white;
+
+                    &:not(:first-child) {
+                        margin-left: 9px;
+                    }
+
+                    span {
+                        position: relative;
+                    }
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        background-color: @basecolor-orange;
+                    }
+                }
+
+                .Waiting:before {
+                    width: 5px;
+                    animation: 2s waiting infinite ease-in-out;
+                }
+
+                .Timer:before {
+                    width: 0;
+                    animation: 60s timer forwards;
+                }
+            }
+
+            .Buttons {
+                display: inline-block;
+                margin-left: 5px;
+
+                button {
+                    position: relative;
+                    display: inline-block;
+                    float: left;
+                    height: 30px;
+                    line-height: 20px;
+                    margin: 5px 0;
+                    padding: 5px 10px;
+                    outline: 3px solid @basecolor-white;
+                    border: none;
+                    overflow: hidden;
+                    background-color: transparent;
+
+                    &:not(:first-child) {
+                        margin-left: 9px;
+                    }
+
+                    span {
+                        position: relative;
+                    }
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        width: 0;
+                        height: 0;
+                        background-color: @basecolor-orange;
+                        transition: .5s ease-in-out;
+                        border-radius: 50%;
+                    }
+
+                    &:hover:before, &.Active:before {
+                        left: 0;
+                        width: 100%;
+                        padding-top: 100%;
+                        height: 0;
+                        transform: rotate(360deg);
+                        border-radius: 0;
+                    }
+                }
+            }
+
+            @media (min-width: 792px) {
+                .Left {
+                    float: left;
+                }
+
+                .Right {
+                    float: right;
+                    padding-right: 5px;
+
+                    .Info, .Buttons {
+                        width: auto;
+                        float: left;
+                    }
+
+                    .Buttons {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    section {
+        padding: 15px 0;
+    }
+}
+
+@keyframes timer {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes waiting {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: calc(~"100% - 5px");
+    }
+    100% {
+        left: 0;
+    }
+}

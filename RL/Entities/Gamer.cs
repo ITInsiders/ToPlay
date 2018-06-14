@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("Gamers")]
     public class Gamer : User
     {
-        public virtual List<GameGamer> Games { get; set; }
-
         protected override object Child => this;
     }
 }

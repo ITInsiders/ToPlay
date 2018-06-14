@@ -1,0 +1,48 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info = (PageInfo)ViewBag.Info;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Info.Title</title>
+    @Styles.Render("~/bundles/DefaultStyles")
+    @Styles.Render(Info.StyleView)
+</head>
+<body>
+    @if (Info.Identity.isAuthentication)
+    {
+        <script>top.location.reload();</script>
+    }
+
+    <div class="Top"><div class="Logo"></div></div>
+    @model TP.PL.Models.Registration
+    @using (Html.BeginForm("Registration", "Home", FormMethod.Post, new { @class = "Form Registration" }))
+    {
+        <div class="Block Left">
+            <div class="Validation">@Html.ValidationMessageFor(x => x.Login)</div>
+            @Html.EditorFor(x => x.Login, new { htmlAttributes = new { @class = "Text", placeholder = "Введите логин" } })
+            <div class="Validation">@Html.ValidationMessageFor(x => x.Password)</div>
+            @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "Text", placeholder = "Введите пароль" } })
+            <div class="Validation">@Html.ValidationMessageFor(x => x.RePassword)</div>
+            @Html.EditorFor(x => x.RePassword, new { htmlAttributes = new { @class = "Text", placeholder = "Повторите пароль" } })
+            <div class="Validation">@Html.ValidationMessageFor(x => x.Email)</div>
+            @Html.EditorFor(x => x.Email, new { htmlAttributes = new { @class = "Text", placeholder = "Введите почту" } })
+        </div>
+        <div class="Block Right">
+            <div class="Validation">@Html.ValidationMessageFor(x => x.Name)</div>
+            @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "Text", placeholder = "Введите фамилию и имя" } })
+            <div class="Validation">@Html.ValidationMessageFor(x => x.DateOfBirth)</div>
+            @Html.EditorFor(x => x.DateOfBirth, new { htmlAttributes = new { @class = "Text", placeholder = "Введите дату рождения" } })
+            <div class="Validation">@Html.ValidationMessageFor(x => x.PhoneNumber)</div>
+            @Html.EditorFor(x => x.PhoneNumber, new { htmlAttributes = new { @class = "Text", placeholder = "Введите номер" } })
+            <input type="submit" class="Click Submit" value="Зарегистрироваться" />
+        </div>
+    }
+
+    @Scripts.Render("~/bundles/DefaultScripts")
+    @Scripts.Render("~/bundles/DefaultValidate")
+</body>
+</html>

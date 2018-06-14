@@ -51,6 +51,7 @@
     <Compile Include="Extensions\StringHelper.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SystemNameService.cs" />
     <Compile Include="Services\Service.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +59,9 @@
       <Project>{a2be0a24-82a4-42ac-95ef-d2cd958f16a3}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RL\RL.csproj">
+    <ProjectReference Include="..\RL\ML.csproj">
       <Project>{83241b9b-1ae0-482d-8a25-fb488b55d979}</Project>
-      <Name>RL</Name>
+      <Name>ML</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

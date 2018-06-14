@@ -1,0 +1,56 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info = (PageInfo)ViewBag.Info;
+    Layout = Info.LayoutHref;
+}
+<div class="Data" data-view="@Info.View" data-controller="@Info.Controller">
+    <div class="HeaderTemp">
+        <div class="Info">
+            <div class="Waiting ">
+                <span>@Info.Language.Get("waiting")</span>
+            </div>
+        </div>
+        <div class="Buttons">
+            <button type="button" class="Ready ">
+                <span>@Info.Language.Get("ready")</span>
+            </button>
+            <button type="button" class="Lose">
+                <span>@Info.Language.Get("lose")</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="Waiting container">
+    <div class="row">
+        <div class="Gamers Case col-12 col-md-8 col-lg-9 col-xl-10">
+            <div class="Block">
+                <div class="Title"><span>@Info.Language.Get("gamers")</span></div>
+                <div class="List row justify-content-center">
+                    @{
+                        for (int i = 0; i < 8; i++)
+                        {
+                            <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                <div class="Gamer"
+                                     style="background-image: url('/Resources/IMG/Users/CEH4TOP/0.jpg')">
+                                    <div class="Name"><span>CEH4TOP</span></div>
+                                </div>
+                            </div>
+                        };
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="Displays Case col-12 col-md-4 col-lg-3 col-xl-2">
+            <div class="Block">
+                <div class="Title"><span>@Info.Language.Get("displays")</span></div>
+                <div class="List row justify-content-center">
+                    <div class="Element col-12">
+                        <div class="Display">
+                            <div class="Name"><span>@Info.Language.Get("display")</span> <span class="Number">1</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

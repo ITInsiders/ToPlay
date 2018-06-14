@@ -38,5 +38,7 @@ namespace TP.BL.Services
 
         public virtual bool Any(Func<T, bool> predicate) => Entities.Any(predicate);
         public virtual bool All(Func<T, bool> predicate) => Entities.All(predicate);
+
+        public virtual void SaveFromDataBase() => DB.Save();
     }
 }

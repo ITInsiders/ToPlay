@@ -112,6 +112,9 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,6 +123,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -166,11 +175,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\SignalR.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HelperController.cs" />
+    <Compile Include="Controllers\IOController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\SearchGame.cs" />
+    <Compile Include="Helpers\LanguageDictionary.cs" />
+    <Compile Include="Hubs\IOConnectionHub.cs" />
+    <Compile Include="Hubs\LFConnectionHub.cs" />
     <Compile Include="Models\Form\Entry.cs" />
     <Compile Include="Models\Form\Registration.cs" />
     <Compile Include="Models\HubModels.cs" />
@@ -178,20 +191,40 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CSS\Fonts.css" />
-    <Content Include="Resources\CSS\Home\Home.css" />
-    <Content Include="Resources\CSS\Home\HomeRegistration.css" />
-    <Content Include="Resources\CSS\Home\HomeEntry.css" />
-    <Content Include="Resources\CSS\Home\HomeHome.css" />
-    <Content Include="Resources\CSS\Home\HomeGames.css" />
-    <Content Include="Resources\CSS\Main\Home.css" />
-    <Content Include="Resources\CSS\Main\Home.min.css">
+    <Content Include="Resources\CSS\Home\Entry.css" />
+    <Content Include="Resources\CSS\Home\Games.css" />
+    <Content Include="Resources\CSS\Home\Main.css" />
+    <Content Include="Resources\CSS\Home\Main.min.css">
+      <DependentUpon>Main.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\CSS\Home\Registration.css" />
+    <Content Include="Resources\CSS\IO\Game.css" />
+    <Content Include="Resources\CSS\IO\Game.min.css">
+      <DependentUpon>Game.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\CSS\IO\Main.css" />
+    <Content Include="Resources\CSS\IO\Main.min.css">
+      <DependentUpon>Main.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\CSS\Layout\Home.css" />
+    <Content Include="Resources\CSS\Layout\Home.min.css">
       <DependentUpon>Home.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\CSS\Layout\IO.css" />
+    <Content Include="Resources\CSS\Layout\IO.min.css">
+      <DependentUpon>IO.css</DependentUpon>
     </Content>
     <Content Include="Resources\CSS\System\Default.css" />
     <Content Include="Resources\CSS\System\Default.min.css">
@@ -222,7 +255,10 @@
     <Content Include="Resources\IMG\System\ToPlayFox_250px.svg" />
     <Content Include="Resources\IMG\System\ToPlayFox_50px.png" />
     <Content Include="Resources\JS\Constellation.js" />
-    <Content Include="Resources\JS\Main\Home.js" />
+    <Content Include="Resources\JS\Home\Games2.js" />
+    <Content Include="Resources\JS\IO\Game.js" />
+    <Content Include="Resources\JS\IO\Main.js" />
+    <Content Include="Resources\JS\Layout\Home.js" />
     <Content Include="Resources\IMG\System\ToPlayFox.psd" />
     <Content Include="Resources\Fonts\BebasNeueBold.otf" />
     <Content Include="Resources\Fonts\BebasNeueBook.otf" />
@@ -250,12 +286,41 @@
     <Content Include="Resources\Fonts\NexaScript.otf" />
     <Content Include="Resources\Fonts\PantonBlack.otf" />
     <Content Include="Resources\Fonts\PantonLight.otf" />
-    <Content Include="Resources\LESS\Main\Home.less" />
+    <Content Include="Resources\JS\Layout\IO.js" />
+    <Content Include="Resources\JS\System\Default.js" />
+    <Content Include="Resources\LESS\Layout\Home.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Resources\LESS\System\Default.less" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Resources\LESS\Home\Main.less" />
+    <Content Include="Resources\LESS\System\Variables.less" />
+    <Content Include="Resources\LESS\IO\Main.less" />
+    <Content Include="Resources\LESS\Layout\IO.less" />
+    <Content Include="Resources\LESS\IO\Game.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Resources\JS\Home\Games.js" />
     <Content Include="Scripts\jcanvas.min.js" />
@@ -270,6 +335,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -282,13 +355,31 @@
     <Content Include="Views\Layout\HomeTemp.cshtml" />
     <Content Include="Views\Home\HomeTemp.cshtml" />
     <Content Include="Views\Layout\Home.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\IO\Main.cshtml" />
+    <Content Include="Views\Layout\IO.cshtml" />
+    <Content Include="Views\Layout\HomeTempMain.cshtml" />
+    <Content Include="Views\Home\Entry.cshtml" />
+    <Content Include="Views\Home\Games.cshtml" />
+    <Content Include="Views\Home\MainTemp.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\LF\Main.cshtml" />
+    <Content Include="Views\IO\Game.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
     <Folder Include="Resources\IMG\Users\" />
     <Folder Include="Resources\JSON\" />
-    <Folder Include="Resources\LESS\Home\" />
+    <Folder Include="Views\Helper\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -299,18 +390,25 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RL\RL.csproj">
-      <Project>{83241b9b-1ae0-482d-8a25-fb488b55d979}</Project>
-      <Name>RL</Name>
+    <ProjectReference Include="..\BL.IO\IO.csproj">
+      <Project>{02416bf5-5e8d-4e98-894f-a58f566d884a}</Project>
+      <Name>IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BL.LF\BL.LF.csproj">
+    <ProjectReference Include="..\RL\ML.csproj">
+      <Project>{83241b9b-1ae0-482d-8a25-fb488b55d979}</Project>
+      <Name>ML</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BL.LF\LF.csproj">
       <Project>{f0a9c2ea-337c-482a-87e8-3928de5c5d15}</Project>
-      <Name>BL.LF</Name>
+      <Name>LF</Name>
     </ProjectReference>
     <ProjectReference Include="..\BL\BL.csproj">
       <Project>{6dc11727-4e4e-4c38-b4fc-6d2b64c816c9}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

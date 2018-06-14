@@ -1,0 +1,34 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info = (PageInfo)ViewBag.Info;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Info.Title</title>
+    @Styles.Render("~/bundles/DefaultStyles")
+    @Styles.Render(Info.StyleView)
+</head>
+<body>
+    @if (Info.Identity.isAuthentication)
+    {
+        <script>top.location.reload();</script>
+    }
+
+    <div class="Top"><div class="Logo"></div></div>
+    @model TP.PL.Models.Entry
+    @using (Html.BeginForm("Entry", "Home", FormMethod.Post, new { @class = "Form Entry" }))
+    {
+        <div class="Validation">@Html.ValidationMessageFor(x => x.Login)</div>
+        @Html.EditorFor(x => x.Login, new { htmlAttributes = new { @class = "Text", placeholder = "Введите логин" } })
+        <div class="Validation">@Html.ValidationMessageFor(x => x.Password)</div>
+        @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "Text", placeholder = "Введите пароль", type = "password" } })
+        <input type="submit" class="Click Submit" value="Войти" />
+    }
+
+    @Scripts.Render("~/bundles/DefaultScripts")
+    @Scripts.Render("~/bundles/DefaultValidate")
+</body>
+</html>

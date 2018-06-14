@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("Games")]
     public class Game
@@ -29,7 +29,5 @@ namespace TP.RL.Entities
         public virtual List<GameComment> Comments { get; set; }
 
         public virtual List<GameImage> Images { get; set; }
-
-        public virtual List<GameGamer> Gamers { get; set; }
     }
 }

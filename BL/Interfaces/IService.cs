@@ -26,5 +26,7 @@ namespace TP.BL.Interfaces
 
         bool Any(Func<T, bool> predicate);
         bool All(Func<T, bool> predicate);
+
+        void SaveFromDataBase();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("Comments")]
     public class Comment
@@ -34,8 +34,7 @@ namespace TP.RL.Entities
             this.CreationDate = DateTime.Now;
         }
 
-        [ForeignKey("Id")]
-        protected virtual object Child { get; set; }
+        protected virtual object Child => this;
         public T Get<T>() where T : Comment, new() => this.Child is T ? (T)this.Child : null;
 
         public Comment Back => this.From;

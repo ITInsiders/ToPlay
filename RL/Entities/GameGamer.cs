@@ -6,28 +6,23 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
-    [Table("GameGamer")]
+    [Table("GameGamers")]
     public class GameGamer
     {
         [Key]
         public long Id { get; set; }
 
-        [ForeignKey("Game")]
-        public long GameId { get; set; }
-        public Game Game { get; set; }
-
         [ForeignKey("Gamer")]
         public long GamerId { get; set; }
         public Gamer Gamer { get; set; }
+        
+        [ForeignKey("GamingSession")]
+        public long? GamingSessionId { get; set; }
+        public GamingSession GamingSession { get; set; }
 
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-
-        public GameGamer()
-        {
-            this.StartDate = DateTime.Now;
-        }
+        protected virtual object Child => this;
+        public T Get<T>() where T : GameGamer, new() => this.Child is T ? (T)this.Child : null;
     }
 }

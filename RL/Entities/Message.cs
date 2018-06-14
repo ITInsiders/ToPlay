@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("Messages")]
     public class Message
@@ -15,11 +15,11 @@ namespace TP.RL.Entities
         public long Id { get; set; }
 
         [ForeignKey("Sender")]
-        public long SenderId { get; set; }
+        public long? SenderId { get; set; }
         public virtual User Sender { get; set; }
 
         [ForeignKey("Recipient")]
-        public long RecipientID { get; set; }
+        public long? RecipientId { get; set; }
         public virtual User Recipient { get; set; }
 
         [ForeignKey("From")]

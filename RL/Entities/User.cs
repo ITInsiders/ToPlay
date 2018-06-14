@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace TP.RL.Entities
+namespace TP.ML.Entities
 {
     [Table("Users")]
     public class User
@@ -15,7 +15,6 @@ namespace TP.RL.Entities
         public long Id { get; set; }
         
         [Required]
-        [Index(IsUnique = true)]
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
@@ -27,10 +26,8 @@ namespace TP.RL.Entities
         public string MiddleName { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
         public string PhoneNumber { get; set; }
         [Required]
-        [Index(IsUnique = true)]
         public string Email { get; set; }
         
         public DateTime DateOfBirth { get; set; }
@@ -53,8 +50,7 @@ namespace TP.RL.Entities
 
         public virtual List<UserImage> Images { get; set; }
 
-        [ForeignKey("Id")]
-        protected virtual object Child { get; set; }
+        protected virtual object Child => this;
         public T Get<T>() where T : User, new() => this.Child is T ? (T)this.Child : null;
     }
 }

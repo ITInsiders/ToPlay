@@ -68,11 +68,11 @@ namespace TP.DAL.Repositories
 
         public bool Any(Func<T, bool> predicate)
         {
-            return this.Entities.Any(predicate);
+            return this.Entities.ToList().Any(predicate);
         }
         public bool All(Func<T, bool> predicate)
         {
-            return this.Entities.All(predicate);
+            return this.Entities.ToList().All(predicate);
         }
     }
 }

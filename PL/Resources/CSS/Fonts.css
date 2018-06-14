@@ -1,4 +1,14 @@
-﻿@font-face { font-family: BebasNeueBlod; src: url(/Resources/Fonts/BebasNeueBold.otf); }
+﻿/*
+font-family: 'Oswald', sans-serif;
+font-family: 'Lobster', cursive;
+font-family: 'Yanone Kaffeesatz', sans-serif;
+font-family: 'Russo One', sans-serif;
+font-family: 'Jura', sans-serif;
+font-family: 'Podkova', serif;
+*/
+@import url('https://fonts.googleapis.com/css?family=Jura|Lobster|Oswald|Podkova|Russo+One|Yanone+Kaffeesatz');
+
+@font-face { font-family: BebasNeueBlod; src: url(/Resources/Fonts/BebasNeueBold.otf); }
 @font-face { font-family: BebasNeueBook; src: url(/Resources/Fonts/BebasNeueBook.otf); }
 @font-face { font-family: BebasNeueLight; src: url(/Resources/Fonts/BebasNeueLight.otf); }
 @font-face { font-family: BebasNeueRegular; src: url(/Resources/Fonts/BebasNeueRegular.otf); }

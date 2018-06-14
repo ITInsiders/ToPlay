@@ -14,17 +14,28 @@ namespace TP
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Game",
-                url: "Game/{action}/{hash}",
-                defaults: new { controller = "Game", action = "Main", hash = UrlParameter.Optional }
+                name: "Helper",
+                url: "Helper/{action}/{key}",
+                defaults: new { controller = "Helper", action = "404", key = UrlParameter.Optional }
             );
 
             routes.MapRoute(
+                name: "InterestingOpinion",
+                url: "IO/{action}/{key}",
+                defaults: new { controller = "IO", action = "Main", key = UrlParameter.Optional }
+            );
+            
+            routes.MapRoute(
                 name: "Home",
+                url: "Home/{action}/{key}",
+                defaults: new { controller = "Home", action = "Main", key = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Default",
                 url: "{action}/{key}",
                 defaults: new { controller = "Home", action = "Main", key = UrlParameter.Optional }
             );
-            
         }
     }
 }

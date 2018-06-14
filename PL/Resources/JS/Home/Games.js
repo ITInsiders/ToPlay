@@ -18,7 +18,7 @@
         SearchID = null;
 
     function Connection() {
-        Connected.GameHub = $.connection.SearchGame;
+        Connected.GameHub = $.connection.GameHub;
         Connected.GameHub.client.startGame = StartGame;
         Connected.GameHub.client.stop = function () { Close(); Frame("/Entry"); }
         $.connection.hub.logging = true;
@@ -31,7 +31,7 @@
             Connected.Disconnected = Connected.GameHub.server.disconnected;
         });
     };
-
+    
     var StartGame = function (URL) {
         $(".WindowGame .Bottom").html(LoadObject.three);
         $(location).attr("href", URL);
@@ -42,7 +42,7 @@
         $('body').append(LoadObject.html);
         this.Start();
     }
-
+    
     var Close = function () {
         clearInterval(SearchID);
         Connected.Stop();

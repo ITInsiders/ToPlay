@@ -1,0 +1,81 @@
+﻿@import "../System/Variables.less";
+
+.container.Gaming {
+    .Title {
+        font-size: 21px;
+    }
+
+    .List {
+        margin: 0;
+        padding: 0 15px;
+
+        .Element {
+            padding: 0 5px;
+            margin: 5px 0;
+
+            .Gamer {
+                position: relative;
+                background-color: @basecolor-orange;
+                background-position-x: center;
+                background-position-y: top;
+                background-repeat: no-repeat;
+                background-size: 100%;
+                cursor: pointer;
+                overflow: hidden;
+                transition: .5s ease-in-out;
+
+                &:hover, &.Select {
+                    background-size: 150%;
+                }
+
+                &.Select {
+                    outline: 3px solid @basecolor-white;
+                }
+
+                &:before {
+                    content: "";
+                    display: block;
+                    padding-top: 100%;
+                }
+
+                &:after {
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    content: "";
+                    display: block;
+                    width: 200%;
+                    height: 200%;
+                    transition: .5s ease-in-out;
+                    box-shadow: 0 0 0 500px @basecolor-orange;
+                    border-radius: 50%;
+                }
+
+                &:hover:after, &.Select:after {
+                    top: 3%;
+                    left: 7%;
+                    width: 86%;
+                    height: 86%;
+                }
+
+                .Name {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 2;
+                }
+            }
+
+            .Name {
+                width: 100%;
+                min-height: 25px;
+                line-height: 25px;
+                background-color: @basecolor-white;
+
+                span {
+                    color: @basecolor-darkgrayblue;
+                }
+            }
+        }
+    }
+}

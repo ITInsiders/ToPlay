@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using TP.ML.Entities;
 
 namespace TP.PL.Models
 {
@@ -68,8 +69,16 @@ namespace TP.PL.Models
         [DataType(DataType.Date, ErrorMessage = "Данный тип не верный")]
         public DateTime DateOfBirth { get; set; }
 
-        public DateTime DateOfRegistration => DateTime.Now;
-        public DateTime DateOfLastVisit => DateTime.Now;
-        public DateTime DateOfLastChange => DateTime.Now;
+        public Gamer Gamer => new Gamer()
+        {
+            Login = this.Login,
+            Password = this.Password,
+            FirstName = this.FirstName,
+            SecondName = this.SecondName,
+            MiddleName = this.MiddleName,
+            DateOfBirth = this.DateOfBirth,
+            Email = this.Email,
+            PhoneNumber = this.PhoneNumber
+        };
     }
 }
