@@ -8,12 +8,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TP.ML.IOEntities
 {
-    [Table("Adjectives")]
-    public class Adjective
+    [Table("IOAdjectives")]
+    public class IOAdjective
     {
         [Key]
         public long Id { get; set; }
 
         public string Value { get; set; }
+
+        public virtual List<IOTaskAdjective> TaskAdjectives { get; set; }
+        public virtual List<IOCharacteristicAdjective> CharacteristicAdjective { get; set; }
     }
 }

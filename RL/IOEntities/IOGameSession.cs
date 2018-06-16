@@ -9,9 +9,11 @@ using TP.ML.Entities;
 
 namespace TP.ML.IOEntities
 {
-    [Table("IOGamingSessions")]
-    public class IOGamingSession : GamingSession
+    [Table("IOGameSessions")]
+    public class IOGameSession : GameSession
     {
-        public virtual List<Task> Tasks { get; set; }
+        public virtual List<IOGameTask> GameTasks { get; set; }
+
+        public List<IOGameGamer> IOGameGamers => GameGamers.Select(x => x.Get<IOGameGamer>()).ToList();
     }
 }

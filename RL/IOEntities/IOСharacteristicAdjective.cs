@@ -8,19 +8,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TP.ML.IOEntities
 {
-    [Table("СharacteristicAdjectives")]
-    public class СharacteristicAdjective
+    [Table("IOCharacteristicAdjectives")]
+    public class IOCharacteristicAdjective
     {
         [Key]
         [Column(Order = 1)]
-        [ForeignKey("Сharacteristic")]
-        public long СharacteristicId { get; set; }
-        public virtual Сharacteristic Сharacteristic { get; set; }
+        [ForeignKey("Characteristic")]
+        public long CharacteristicId { get; set; }
+        public virtual IOCharacteristic Characteristic { get; set; }
 
         [Key]
         [Column(Order = 2)]
         [ForeignKey("Adjective")]
         public long AdjectiveId { get; set; }
-        public virtual Adjective Adjective { get; set;}
+        public virtual IOAdjective Adjective { get; set;}
     }
 }

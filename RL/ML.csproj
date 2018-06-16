@@ -62,16 +62,17 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserComment.cs" />
     <Compile Include="Entities\UserImage.cs" />
-    <Compile Include="Entities\GamingSession.cs" />
+    <Compile Include="Entities\GameSession.cs" />
     <Compile Include="Helper\Languages.cs" />
-    <Compile Include="IOEntities\Adjective.cs" />
-    <Compile Include="IOEntities\Answer.cs" />
-    <Compile Include="IOEntities\IOGamingSession.cs" />
-    <Compile Include="IOEntities\СharacteristicAdjective.cs" />
+    <Compile Include="IOEntities\IOAdjective.cs" />
+    <Compile Include="IOEntities\IOAnswer.cs" />
+    <Compile Include="IOEntities\IOGameTask.cs" />
+    <Compile Include="IOEntities\IOGameSession.cs" />
+    <Compile Include="IOEntities\IOСharacteristicAdjective.cs" />
     <Compile Include="IOEntities\IOGameGamer.cs" />
-    <Compile Include="IOEntities\Task.cs" />
-    <Compile Include="IOEntities\TaskAdjective.cs" />
-    <Compile Include="IOEntities\Сharacteristic.cs" />
+    <Compile Include="IOEntities\IOTask.cs" />
+    <Compile Include="IOEntities\IOTaskAdjective.cs" />
+    <Compile Include="IOEntities\IOСharacteristic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

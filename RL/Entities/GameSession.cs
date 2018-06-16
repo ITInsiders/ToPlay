@@ -8,8 +8,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TP.ML.Entities
 {
-    [Table("GamingSessions")]
-    public class GamingSession
+    [Table("GameSessions")]
+    public class GameSession
     {
         [Key]
         public long Id { get; set; }
@@ -23,12 +23,12 @@ namespace TP.ML.Entities
 
         public virtual List<GameGamer> GameGamers { get; set; }
 
-        public GamingSession()
+        public GameSession()
         {
             this.Start = DateTime.Now;
         }
 
         protected virtual object Child => this;
-        public T Get<T>() where T : GamingSession, new() => this.Child is T ? (T)this.Child : null;
+        public T Get<T>() where T : GameSession, new() => this.Child is T ? (T)this.Child : null;
     }
 }

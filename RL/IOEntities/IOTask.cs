@@ -8,18 +8,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TP.ML.IOEntities
 {
-    [Table("Tasks")]
-    public class Task
+    [Table("IOTasks")]
+    public class IOTask
     {
         [Key]
         public long Id { get; set; }
-
-        [ForeignKey("IOGamingSession")]
-        public long IOGamingSessionId { get; set; }
-        public virtual IOGamingSession IOGamingSession { get; set; }
-
         public string Value { get; set; }
 
-        public virtual Answer Answer { get; set; }
+        public virtual List<IOGameTask> IOGameTasks { get; set; }
+        public virtual List<IOTaskAdjective> TaskAdjectives { get; set; }
+        public virtual List<IOAnswer> Answers { get; set; }
     }
 }

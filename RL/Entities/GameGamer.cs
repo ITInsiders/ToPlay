@@ -18,9 +18,9 @@ namespace TP.ML.Entities
         public long GamerId { get; set; }
         public Gamer Gamer { get; set; }
         
-        [ForeignKey("GamingSession")]
-        public long? GamingSessionId { get; set; }
-        public GamingSession GamingSession { get; set; }
+        [ForeignKey("GameSession")]
+        public long? GameSessionId { get; set; }
+        public GameSession GameSession { get; set; }
 
         protected virtual object Child => this;
         public T Get<T>() where T : GameGamer, new() => this.Child is T ? (T)this.Child : null;

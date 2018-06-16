@@ -9,12 +9,9 @@ using TP.ML.Entities;
 
 namespace TP.ML.IOEntities
 {
-    [Table("Answers")]
-    public class Answer
+    [Table("IOAnswers")]
+    public class IOAnswer
     {
-        [Key]
-        public long Id { get; set; }
-
         [ForeignKey("Sender")]
         public long? SenderId { get; set; }
         public virtual IOGameGamer Sender { get; set; }
@@ -25,6 +22,6 @@ namespace TP.ML.IOEntities
         
         [ForeignKey("Task")]
         public long TaskId { get; set; }
-        public virtual Task Task { get; set; }
+        public virtual IOTask Task { get; set; }
     }
 }

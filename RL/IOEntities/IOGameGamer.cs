@@ -12,12 +12,14 @@ namespace TP.ML.IOEntities
     [Table("IOGameGamers")]
     public class IOGameGamer : GameGamer
     {
-        [ForeignKey("Сharacteristic")]
-        public long СharacteristicId { get; set; }
-        public virtual Сharacteristic Сharacteristic { get; set; }
+        [ForeignKey("Characteristic")]
+        public long CharacteristicId { get; set; }
+        public virtual IOCharacteristic Characteristic { get; set; }
 
-        public virtual List<Task> Tasks { get; set; }
+        public List<IOAnswer> Answers { get; set; }
 
         protected override object Child => this;
+
+        public IOGameSession IOGameSession => GameSession.Get<IOGameSession>();
     }
 }
