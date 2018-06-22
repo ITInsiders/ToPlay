@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace TP.BL.LF.Extensions
 {
-    class Functions
+    public class Functions
     {
+        public bool Route { get; set; }
+        public bool[,] Step { get; set; }
     }
 }

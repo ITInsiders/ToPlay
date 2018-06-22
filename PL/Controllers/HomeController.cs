@@ -41,7 +41,7 @@ namespace TP.PL.Controllers
             ViewBag.Info = Info.setView("Entry");
             if (ModelState.IsValid)
             {
-                if (Info.Identity.Authentication(Model.Login, Model.Password)) return Redirect(Request.UrlReferrer.AbsolutePath);
+                if (Info.Identity.Authentication(Model.Login.ToUpper(), Model.Password)) return Redirect(Request.UrlReferrer.AbsolutePath);
                 else ModelState.AddModelError("Password", "Пароль не верный");
             }
             return View();

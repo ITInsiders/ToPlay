@@ -15,15 +15,20 @@
                 padding: 0 5px;
                 margin: 5px 0;
 
+                * {
+                    transition: .5s ease-in-out;
+                }
+
                 .Gamer {
                     position: relative;
-                    background-color: @basecolor-orange;
+                    background-color: @basecolor-darkgrayblue;
                     background-position-x: center;
                     background-position-y: top;
                     background-repeat: no-repeat;
                     background-size: 100%;
                     overflow: hidden;
-                    transition: .5s ease-in-out;
+                    outline: 3px solid @basecolor-white;
+                    padding-bottom: 25px;
 
                     &:hover {
                         background-size: 150%;
@@ -37,22 +42,23 @@
 
                     &:after {
                         position: absolute;
-                        top: -50%;
-                        left: -50%;
+                        top: 0;
+                        left: 0;
                         content: "";
                         display: block;
-                        width: 200%;
-                        height: 200%;
-                        transition: .5s ease-in-out;
+                        width: 100%;
+                        height: calc(~"100% - 25px");
                         box-shadow: 0 0 0 500px @basecolor-orange;
-                        border-radius: 50%;
+                        border-radius: 0;
+                        transition: .5s ease-in-out;
                     }
 
                     &:hover:after, &.Select:after {
-                        top: 3%;
-                        left: 7%;
-                        width: 86%;
-                        height: 86%;
+                        top: 5%;
+                        left: 5%;
+                        width: 90%;
+                        height: calc(~"90% - 25px");
+                        border-radius: 50%;
                     }
 
                     .Name {
@@ -71,6 +77,22 @@
 
                     span {
                         color: @basecolor-darkgrayblue;
+                    }
+                }
+
+
+
+                &.Ready {
+                    .Gamer {
+                        outline-color: @basecolor-orange;
+                    }
+
+                    .Name {
+                        background-color: @basecolor-orange;
+
+                        span {
+                            color: @basecolor-white;
+                        }
                     }
                 }
             }

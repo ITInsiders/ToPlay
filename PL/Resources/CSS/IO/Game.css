@@ -13,7 +13,7 @@
 }
 .container.Gaming .List .Element .Gamer {
   position: relative;
-  background-color: #fe6d39;
+  background-color: #2e2d3e;
   background-position-x: center;
   background-position-y: top;
   background-repeat: no-repeat;
@@ -21,6 +21,7 @@
   cursor: default;
   overflow: hidden;
   transition: 0.5s ease-in-out;
+  outline: 3px solid #ffffff;
 }
 .container.Gaming .List .Element .Gamer:before {
   content: "";
@@ -111,15 +112,13 @@
 .container.Gaming .List:not(.Answer) .Gamer .Answer {
   transform: scale(0, 0);
 }
-.container.Gaming .List:not(.Answer) .Gamer:hover,
-.container.Gaming .List:not(.Answer) .Gamer.Select {
+.container.Gaming .List:not(.Answer) .Gamer:hover {
   background-size: 150%;
 }
 .container.Gaming .List:not(.Answer) .Gamer.Select {
-  outline: 3px solid #ffffff;
+  outline: 5px solid #ffffff;
 }
-.container.Gaming .List:not(.Answer) .Gamer:hover:after,
-.container.Gaming .List:not(.Answer) .Gamer.Select:after {
+.container.Gaming .List:not(.Answer) .Gamer:hover:after {
   top: 3%;
   left: 7%;
   width: 86%;

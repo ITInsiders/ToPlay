@@ -64,15 +64,15 @@
     <Compile Include="Entities\UserImage.cs" />
     <Compile Include="Entities\GameSession.cs" />
     <Compile Include="Helper\Languages.cs" />
-    <Compile Include="IOEntities\IOAdjective.cs" />
-    <Compile Include="IOEntities\IOAnswer.cs" />
-    <Compile Include="IOEntities\IOGameTask.cs" />
-    <Compile Include="IOEntities\IOGameSession.cs" />
-    <Compile Include="IOEntities\IOСharacteristicAdjective.cs" />
-    <Compile Include="IOEntities\IOGameGamer.cs" />
-    <Compile Include="IOEntities\IOTask.cs" />
-    <Compile Include="IOEntities\IOTaskAdjective.cs" />
-    <Compile Include="IOEntities\IOСharacteristic.cs" />
+    <Compile Include="IOEntities\IO_Attribute.cs" />
+    <Compile Include="IOEntities\IO_Answer.cs" />
+    <Compile Include="IOEntities\IO_GameTask.cs" />
+    <Compile Include="IOEntities\IO_GameSession.cs" />
+    <Compile Include="IOEntities\IO_FeatureAttribute.cs" />
+    <Compile Include="IOEntities\IO_GameGamer.cs" />
+    <Compile Include="IOEntities\IO_Task.cs" />
+    <Compile Include="IOEntities\IO_TaskAttribute.cs" />
+    <Compile Include="IOEntities\IO_Feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

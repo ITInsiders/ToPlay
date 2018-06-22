@@ -49,6 +49,8 @@ namespace TP.ML.Entities
         public virtual List<Message> Messages { get; set; }
 
         public virtual List<UserImage> Images { get; set; }
+        public UserImage MainImage => Images?.FirstOrDefault(x => x.Main) ??
+            new UserImage() { Main = true, URL = "/Resources/IMG/System/ToPlayFox_250px.svg", User = this, UserId = this.Id };
 
         protected virtual object Child => this;
         public T Get<T>() where T : User, new() => this.Child is T ? (T)this.Child : null;

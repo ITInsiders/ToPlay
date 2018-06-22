@@ -1,0 +1,28 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info = (PageInfo)ViewBag.Info;
+    if (Info.isPart)
+    { @RenderBody() return;
+}
+}
+
+@section Info
+{
+    <div class="message">
+        <div class="title">На ход осталось:</div>
+        <div class="time">30</div>
+        <div class="type">секунд</div>
+    </div>
+}
+
+<div class="Borders Left">
+    <div class="Image"></div>
+    <div class="Login"></div>
+    <div class="Mes"></div>
+    <div class="Color"></div>
+</div>
+<div class="Center">
+    <canvas class="GameBlock Canvas" width="600" height="600"></canvas>
+</div>
+<div class="Borders Right">
+</div>

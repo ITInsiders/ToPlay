@@ -41,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\GameMechanics.cs" />
-    <Compile Include="Repositories\GamesRepository.cs" />
-    <Compile Include="Models\Game.cs" />
+    <Compile Include="Actions\GameMechanic.cs" />
+    <Compile Include="Models\ConnectGame.cs" />
+    <Compile Include="Models\ConnectGamer.cs" />
+    <Compile Include="Models\JsonAnswer.cs" />
+    <Compile Include="Models\JsonGame.cs" />
+    <Compile Include="Models\JsonGamer.cs" />
+    <Compile Include="Models\JsonResult.cs" />
+    <Compile Include="Models\JsonTask.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

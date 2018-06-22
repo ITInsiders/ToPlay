@@ -8,19 +8,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TP.ML.IOEntities
 {
-    [Table("IOGameTasks")]
-    public class IOGameTask
+    [Table("IO_GameTasks")]
+    public class IO_GameTask
     {
         [Key]
         [Column(Order = 1)]
         [ForeignKey("GameSession")]
         public long GameSessionId { get; set; }
-        public virtual IOGameSession GameSession { get; set; }
+        public virtual IO_GameSession GameSession { get; set; }
 
         [Key]
         [Column(Order = 2)]
         [ForeignKey("Task")]
         public long TaskId { get; set; }
-        public virtual IOTask Task { get; set; }
+        public virtual IO_Task Task { get; set; }
     }
 }

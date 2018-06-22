@@ -15,7 +15,7 @@
 
             .Gamer {
                 position: relative;
-                background-color: @basecolor-orange;
+                background-color: @basecolor-darkgrayblue;
                 background-position-x: center;
                 background-position-y: top;
                 background-repeat: no-repeat;
@@ -23,6 +23,7 @@
                 cursor: default;
                 overflow: hidden;
                 transition: .5s ease-in-out;
+                outline: 3px solid @basecolor-white;
 
                 &:before {
                     content: "";
@@ -131,15 +132,15 @@
                     transform: scale(0, 0);
                 }
 
-                &:hover, &.Select {
+                &:hover {
                     background-size: 150%;
                 }
 
                 &.Select {
-                    outline: 3px solid @basecolor-white;
+                    outline: 5px solid @basecolor-white;
                 }
 
-                &:hover:after, &.Select:after {
+                &:hover:after {
                     top: 3%;
                     left: 7%;
                     width: 86%;

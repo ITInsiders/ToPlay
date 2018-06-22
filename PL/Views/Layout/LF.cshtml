@@ -1,0 +1,49 @@
+﻿@using TP.PL.Helpers;
+@{
+    PageInfo Info = (PageInfo)ViewBag.Info;
+    if (Info.isPart)
+    { @RenderBody() return;
+}
+}
+<!DOCTYPE html>
+<html lang="@Info.GetLanguage.ToLower()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Resources/IMG/System/Fox50.png" type="image/png">
+    <title>@Info.Title</title>
+    @Styles.Render("~/bundles/DefaultStyles")
+    @Styles.Render(Info.StyleController)
+    @Styles.Render(Info.StyleView)
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <div class="Header container">
+            <div class="Left">
+                <div class="Title">
+                    <img class="Logo" src="~/Resources/IMG/System/ToPlayFox.svg" />
+                    <div class="Name d-flex flex-column">
+                        <div class="Site Line"><span>ToPlay</span></div>
+                        <div class="Game Line"><span>@Info.Language.Get("laser fight")</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="Right">
+                <div class="Info">
+                </div>
+                <div class="Buttons">
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="Page">
+        @RenderBody()
+    </section>
+    <footer></footer>
+    @Scripts.Render("~/bundles/DefaultScripts")
+    @Scripts.Render(Info.ScriptController)
+    @Scripts.Render(Info.ScriptView)
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

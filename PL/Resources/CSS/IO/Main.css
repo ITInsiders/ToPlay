@@ -13,15 +13,19 @@
   padding: 0 5px;
   margin: 5px 0;
 }
+.container.Waiting .Case .List .Element * {
+  transition: 0.5s ease-in-out;
+}
 .container.Waiting .Case .List .Element .Gamer {
   position: relative;
-  background-color: #fe6d39;
+  background-color: #2e2d3e;
   background-position-x: center;
   background-position-y: top;
   background-repeat: no-repeat;
   background-size: 100%;
   overflow: hidden;
-  transition: 0.5s ease-in-out;
+  outline: 3px solid #ffffff;
+  padding-bottom: 25px;
 }
 .container.Waiting .Case .List .Element .Gamer:hover {
   background-size: 150%;
@@ -33,22 +37,23 @@
 }
 .container.Waiting .Case .List .Element .Gamer:after {
   position: absolute;
-  top: -50%;
-  left: -50%;
+  top: 0;
+  left: 0;
   content: "";
   display: block;
-  width: 200%;
-  height: 200%;
-  transition: 0.5s ease-in-out;
+  width: 100%;
+  height: calc(100% - 25px);
   box-shadow: 0 0 0 500px #fe6d39;
-  border-radius: 50%;
+  border-radius: 0;
+  transition: 0.5s ease-in-out;
 }
 .container.Waiting .Case .List .Element .Gamer:hover:after,
 .container.Waiting .Case .List .Element .Gamer.Select:after {
-  top: 3%;
-  left: 7%;
-  width: 86%;
-  height: 86%;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: calc(90% - 25px);
+  border-radius: 50%;
 }
 .container.Waiting .Case .List .Element .Gamer .Name {
   position: absolute;
@@ -64,4 +69,13 @@
 }
 .container.Waiting .Case .List .Element .Name span {
   color: #2e2d3e;
+}
+.container.Waiting .Case .List .Element.Ready .Gamer {
+  outline-color: #fe6d39;
+}
+.container.Waiting .Case .List .Element.Ready .Name {
+  background-color: #fe6d39;
+}
+.container.Waiting .Case .List .Element.Ready .Name span {
+  color: #ffffff;
 }

@@ -1,17 +1,45 @@
-﻿
+﻿@using TP.PL.Helpers;
 @{
-    Layout = null;
+    PageInfo Info = (PageInfo)ViewBag.Info;
+    Layout = Info.LayoutHref;
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Main</title>
-</head>
-<body>
-    <div> 
+<div class="Data" data-view="@Info.View" data-controller="@Info.Controller">
+    <div class="HeaderTemp">
+        <div class="Info">
+            <div class="Waiting ">
+                <span>@Info.Language.Get("waiting")</span>
+            </div>
+        </div>
+        <div class="Buttons">
+            <button type="button" class="Ready">
+                <span>@Info.Language.Get("ready")</span>
+            </button>
+            <button type="button" class="Lose">
+                <span>@Info.Language.Get("lose")</span>
+            </button>
+        </div>
     </div>
-</body>
-</html>
+</div>
+<div class="Waiting container">
+    <div class="row">
+        <div class="Gamers Case col-12">
+            <div class="Block">
+                <div class="Title"><span>@Info.Language.Get("gamers")</span></div>
+                <div class="List row justify-content-center">
+                    <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <div class="Gamer"
+                             style="background-image: url('/Resources/IMG/System/ToPlayFox_250px.svg')">
+                            <div class="Name"><span>CEH4TOP</span></div>
+                        </div>
+                    </div>
+                    <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <div class="Gamer"
+                             style="background-image: url('/Resources/IMG/System/ToPlayFox_250px.svg')">
+                            <div class="Name"><span>MISS-CEH4TOP</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

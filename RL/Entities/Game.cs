@@ -16,6 +16,7 @@ namespace TP.ML.Entities
 
         [Required]
         public string Name { get; set; }
+        public string Href { get; set; }
 
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }

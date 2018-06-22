@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP.ML.Helper;
 
-namespace TP.BL.LF.Extensions
+namespace TP.BL.IO.Models
 {
-    class Map
+    public class JsonTask
     {
+        public string Value { get; set; }
     }
 }

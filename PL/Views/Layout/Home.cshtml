@@ -1,15 +1,14 @@
 ﻿@using TP.PL.Helpers;
 @{
-    PageInfo Info  = (PageInfo)ViewBag.Info;
+    PageInfo Info = (PageInfo)ViewBag.Info;
     if (Info.isPart) { @RenderBody() return; }
 }
 <!DOCTYPE html>
-<html>
+<html lang="@Info.GetLanguage.ToLower()">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="~/Images/System/ToPlayFox_50px.png" type="image/png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Resources/IMG/System/Fox50.png" type="image/png">
     <title>@Info.Title</title>
     @Styles.Render("~/bundles/DefaultStyles")
     @Styles.Render(Info.StyleController)
@@ -17,57 +16,69 @@
     @RenderSection("Styles", required: false)
 </head>
 <body>
-    <header class="Header">
-        <div class="Stars"><canvas id="HeaderStars"></canvas></div>
-        <div class="InfoBlock">
-            <div class="Message Left">Welcome to us...</div>
-            @if (Info.Identity.isAuthentication)
-            {
-                <div class="Message Right">
-                    @Info.Identity.User.Login
-                    <div class="ModalBlock">
-                        <div class="Photo"></div>
-                        <div class="Title Space"></div>
-                        <div class="Title">Профиль</div>
-                        <a class="Title" href="Exit">Выход</a>
+    <header>
+        <div class="container">
+            <div class="Top">
+                <div class="Left">
+                    <span>@Info.Language.Get("welcome to us")...</span>
+                </div>
+                <div class="Right">
+                    <div class="User">
+                        @{
+                            if (Info.Identity.isAuth)
+                            {
+                                Identity I = Info.Identity;
+                                <span>...@I.User.Login</span>
+                                <div class="PlayerMenu">
+                                    <div class="Left Photo Load" data-image="@I.User.MainImage.URL" onclick="loadPhoto"></div>
+                                    <div class="Right">
+                                        <div class="Line"></div>
+                                        <div class="Line"><span>@Info.Language.Get("exit")</span></div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <span>...@Info.Language.Get("player")</span>
+                                <div class="PlayerMenu">
+                                    <div class="Left Photo"></div>
+                                    <div class="Right">
+                                        <div class="Line"><span>@Info.Language.Get("entry")</span></div>
+                                        <div class="Line"><span>@Info.Language.Get("registration")</span></div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="Language">
+                        <span>@Info.GetLanguage.ToLower()</span>
+                        <div class="Select">
+                            <div class="Option"><span>En</span></div>
+                            <div class="Option"><span>Ge</span></div>
+                            <div class="Option"><span>Ru</span></div>
+                        </div>
                     </div>
                 </div>
-            }
-            else
-            {
-                <div class="Message Right">
-                    player
-                    <div class="ModalBlock">
-                        <div class="Photo"></div>
-                        <div class="Title Space"></div>
-                        <div class="Title" onclick="Frame('/Entry');">Войти</div>
-                        <div class="Title" onclick="Frame('/Registration');">Регистрация</div>
-                    </div>
-                </div>
-            }
-        </div>
-        <div class="FixedBlock">
-            <div class="Lable">
-                <div class="Title">TO</div>
-                <div class="Title">PLAY</div>
             </div>
-            <div class="Menu">
-                <a class="Title MenuHome" href="Main">Главная</a>
-                <a class="Title MenuGames" href="Games">Игры</a>
+            <div class="Bottom">
+                <div class="Left">
+                    <div class="Image"></div>
+                    <div class="Name"><span>ToPlay</span></div>
+                </div>
+                <div class="Right Menu">
+                    <a><div class="Link Main"><span>@Info.Language.Get("main")</span></div></a>
+                    <a><div class="Link Games"><span>@Info.Language.Get("games")</span></div></a>
+                </div>
             </div>
         </div>
     </header>
-    <section class="Section container">
+    <section>
         @RenderBody()
     </section>
-    <footer class="Footer">
-        <div class="Stars"><canvas id="FooterStars"></canvas></div>
+    <footer>
+
     </footer>
-    <div class="BlackFrame" onclick="Frame();">
-        <iframe class="Frame"></iframe>
-    </div>
     @Scripts.Render("~/bundles/DefaultScripts")
-    @Scripts.Render("~/Resources/JS/Constellation.js")
     @Scripts.Render(Info.ScriptController)
     @Scripts.Render(Info.ScriptView)
     @RenderSection("Scripts", required: false)

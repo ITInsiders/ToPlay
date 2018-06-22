@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Extensions\Functions.cs" />
     <Compile Include="Extensions\Geometry.cs" />
-    <Compile Include="Extensions\Map.cs" />
+    <Compile Include="Models\Map.cs" />
     <Compile Include="Extensions\Maps.cs" />
     <Compile Include="Extensions\MyMath.cs" />
     <Compile Include="Extensions\TypesShip.cs" />
@@ -52,13 +52,7 @@
     <Compile Include="Models\TypeShip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Calculate\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Resources\CSS\" />
-    <Folder Include="Resources\Images\" />
-    <Folder Include="Resources\JS\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj">
       <Project>{6dc11727-4e4e-4c38-b4fc-6d2b64c816c9}</Project>

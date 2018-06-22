@@ -20,6 +20,12 @@ namespace TP
             );
 
             routes.MapRoute(
+                name: "LaserFight",
+                url: "LF/{action}/{key}",
+                defaults: new { controller = "LF", action = "Main", key = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "InterestingOpinion",
                 url: "IO/{action}/{key}",
                 defaults: new { controller = "IO", action = "Main", key = UrlParameter.Optional }

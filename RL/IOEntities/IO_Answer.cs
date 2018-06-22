@@ -9,19 +9,25 @@ using TP.ML.Entities;
 
 namespace TP.ML.IOEntities
 {
-    [Table("IOAnswers")]
-    public class IOAnswer
+    [Table("IO_Answers")]
+    public class IO_Answer
     {
+        [Key]
+        [Column(Order = 1)]
         [ForeignKey("Sender")]
         public long? SenderId { get; set; }
-        public virtual IOGameGamer Sender { get; set; }
-        
+        public virtual Gamer Sender { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
         [ForeignKey("Recipient")]
-        public long? RecipientId { get; set; }
-        public virtual IOGameGamer Recipient { get; set; }
-        
+        public long RecipientId { get; set; }
+        public virtual Gamer Recipient { get; set; }
+
+        [Key]
+        [Column(Order = 3)]
         [ForeignKey("Task")]
         public long TaskId { get; set; }
-        public virtual IOTask Task { get; set; }
+        public virtual IO_Task Task { get; set; }
     }
 }

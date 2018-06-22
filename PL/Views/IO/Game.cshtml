@@ -7,7 +7,7 @@
     <div class="HeaderTemp">
         <div class="Info">
             <div class="Coins">
-                <span id="Coins">0</span>
+                <span id="Coins">200</span>
                 <span> @Info.Language.Get("coins")</span>
             </div>
             <div class="Timer">
@@ -26,37 +26,30 @@
         </div>
     </div>
 </div>
+
+<div id="Template" style="display: none" data-id="@ViewBag.Id">
+    <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+        <div class="Gamer"
+             style="background-image: url('/Resources/IMG/System/ToPlayFox_250px.svg')">
+            <div class="Answer">
+                <span class="Login"></span>
+                <hr />
+                <span>+</span>
+                <span class="CountCoints"></span>
+                <span>@Info.Language.Get("coins")</span>
+            </div>
+            <div class="Name"><span></span></div>
+        </div>
+    </div>
+</div>
 <div class="Gaming container">
     <div class="row">
         <div class="Line col-12">
             <div class="Title">
-                <span>@Info.Language.Get("who of the players")</span> 
-                <span>@Info.Language.Get("will take a spider in the hand?")</span>
+                <span>@Info.Language.Get("who of the players")</span>
+                <span>@Info.Language.Get("will take a spider in the hand")?</span>
             </div>
         </div>
-        <div class="List Answer col-12 row justify-content-center">
-            @{
-                Random random = new Random();
-                for (int i = 0; i < 4; i++)
-                {
-                    <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                        <div class="Gamer"
-                             style="background-image: url('/Resources/IMG/Users/CEH4TOP/0.jpg')">
-                            @{ int k = random.Next(1, 8); int t = i + 1; }
-                            <div class="Answer">
-                                <span class="Login">CEH4TOP @k</span>
-                                <hr />
-                                <span>+</span>
-                                <span class="CountCoints">100</span>
-                                <span>@Info.Language.Get("coins")</span>
-                            </div>
-                            <div class="Name">
-                                <span class="Login">CEH4TOP @t</span>
-                            </div>
-                        </div>
-                    </div>
-                };
-            }
-        </div>
+        <div class="List col-12 row justify-content-center" id="Gamers"></div>
     </div>
 </div>

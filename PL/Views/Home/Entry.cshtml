@@ -2,17 +2,19 @@
 @{
     PageInfo Info = (PageInfo)ViewBag.Info;
 }
-
 <!DOCTYPE html>
-<html>
+<html lang="@Info.GetLanguage.ToLower()">
 <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Resources/IMG/System/Fox50.png" type="image/png">
     <title>@Info.Title</title>
     @Styles.Render("~/bundles/DefaultStyles")
+    @Styles.Render(Info.StyleController)
     @Styles.Render(Info.StyleView)
 </head>
 <body>
-    @if (Info.Identity.isAuthentication)
+    @if (Info.Identity.isAuth)
     {
         <script>top.location.reload();</script>
     }
@@ -25,10 +27,10 @@
         @Html.EditorFor(x => x.Login, new { htmlAttributes = new { @class = "Text", placeholder = "Введите логин" } })
         <div class="Validation">@Html.ValidationMessageFor(x => x.Password)</div>
         @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "Text", placeholder = "Введите пароль", type = "password" } })
-        <input type="submit" class="Click Submit" value="Войти" />
+        <button type="submit" class="Click Submit"><span>@Info.Language.Get("entry")</span></button>
     }
-
     @Scripts.Render("~/bundles/DefaultScripts")
-    @Scripts.Render("~/bundles/DefaultValidate")
+    @Scripts.Render(Info.ScriptController)
+    @Scripts.Render(Info.ScriptView)
 </body>
 </html>

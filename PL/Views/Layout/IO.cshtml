@@ -38,10 +38,10 @@
     <section id="Page">
         @RenderBody()
     </section>
-    <footer>
-
-    </footer>
+    <footer></footer>
     @Scripts.Render("~/bundles/DefaultScripts")
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Resources/JS/IO/SignalR.js"></script>
     @Scripts.Render(Info.ScriptController)
     @Scripts.Render(Info.ScriptView)
     @RenderSection("Scripts", required: false)

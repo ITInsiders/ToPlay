@@ -12,6 +12,7 @@ namespace TP
     {
         private HttpContext HC => HttpContext.Current;
         public User User;
+        public long UserId => User.Id;
 
         public Identity()
         {
@@ -21,7 +22,7 @@ namespace TP
         private bool Check(string Key, string Password)
         {
             this.User = Service<User>.I
-                .Get(x => x.Login == Key || x.PhoneNumber == Key || x.Email == Key)
+                .Get(x => x.Login.ToUpper() == Key.ToUpper() || x.PhoneNumber == Key || x.Email.ToUpper() == Key.ToUpper())
                 .FirstOrDefault(x => Password == x.Password);
 
             return User != null;
@@ -51,7 +52,7 @@ namespace TP
         {
             clearAuthentication();
 
-            if (Check(Login, Password))
+            if (Check(Login, Hash.GetHash(Hash.TypeHash.SHA512, Password, Hash.GenerateSalt(Login))))
             {
                 HttpCookie Cookie = new HttpCookie("_usk");
                 Cookie.Expires = DateTime.Now.AddDays(7);
@@ -67,6 +68,7 @@ namespace TP
         }
 
         public bool isAuthentication => Check(HC.Request.Cookies["_usk"]?.Value);
+        public bool isAuth => User != null;
 
         public void clearAuthentication()
         {

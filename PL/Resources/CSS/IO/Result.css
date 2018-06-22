@@ -13,13 +13,14 @@
 }
 .container.Gaming .List .Element .Gamer {
   position: relative;
-  background-color: #fe6d39;
+  background-color: #2e2d3e;
   background-position-x: center;
   background-position-y: top;
   background-repeat: no-repeat;
   background-size: 100%;
   cursor: default;
   transition: 0.5s ease-in-out;
+  outline: 3px solid #ffffff;
 }
 .container.Gaming .List .Element .Gamer:before {
   content: "";
@@ -45,6 +46,7 @@
   width: 90%;
   background-color: #2e2d3e;
   overflow: hidden;
+  outline: 2px solid #ffffff;
 }
 .container.Gaming .List .Element .Gamer .Characteristic .Title {
   display: inline-block;

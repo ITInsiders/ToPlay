@@ -13,7 +13,7 @@ namespace TP.BL.Services
     {
         private static Service<T> instance;
         public static Service<T> I => instance ?? (instance = new Service<T>());
-
+        
         protected Service() { }
 
         private static IUnitOfWork DB => EFUnitOfWork.I;

@@ -12,9 +12,10 @@ namespace TP.PL.Controllers
         PageInfo pageInfo = new PageInfo("IO");
 
         [HttpGet]
-        public ActionResult Main()
+        public ActionResult Main(string Id = null)
         {
             ViewBag.Info = pageInfo.setView("Main");
+            ViewBag.Id = Id;
             return View();
         }
 

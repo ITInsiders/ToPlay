@@ -178,6 +178,7 @@
     <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="Controllers\IOController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LFController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +206,9 @@
     <Content Include="Resources\CSS\Fonts.css" />
     <Content Include="Resources\CSS\Home\Entry.css" />
     <Content Include="Resources\CSS\Home\Games.css" />
+    <Content Include="Resources\CSS\Home\Games.min.css">
+      <DependentUpon>Games.css</DependentUpon>
+    </Content>
     <Content Include="Resources\CSS\Home\Main.css" />
     <Content Include="Resources\CSS\Home\Main.min.css">
       <DependentUpon>Main.css</DependentUpon>
@@ -229,6 +233,10 @@
     <Content Include="Resources\CSS\Layout\IO.css" />
     <Content Include="Resources\CSS\Layout\IO.min.css">
       <DependentUpon>IO.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\CSS\Layout\LF.css" />
+    <Content Include="Resources\CSS\Layout\LF.min.css">
+      <DependentUpon>LF.css</DependentUpon>
     </Content>
     <Content Include="Resources\CSS\System\Default.css" />
     <Content Include="Resources\CSS\System\Default.min.css">
@@ -263,6 +271,7 @@
     <Content Include="Resources\JS\IO\Game.js" />
     <Content Include="Resources\JS\IO\Main.js" />
     <Content Include="Resources\JS\IO\Result.js" />
+    <Content Include="Resources\JS\IO\SignalR.js" />
     <Content Include="Resources\JS\Layout\Home.js" />
     <Content Include="Resources\IMG\System\ToPlayFox.psd" />
     <Content Include="Resources\Fonts\BebasNeueBold.otf" />
@@ -291,6 +300,7 @@
     <Content Include="Resources\Fonts\NexaScript.otf" />
     <Content Include="Resources\Fonts\PantonBlack.otf" />
     <Content Include="Resources\Fonts\PantonLight.otf" />
+    <Content Include="Resources\JS\Layout\LF.js" />
     <Content Include="Resources\JS\Layout\IO.js" />
     <Content Include="Resources\JS\System\Default.js" />
     <Content Include="Resources\LESS\Layout\Home.less" />
@@ -327,6 +337,8 @@
     <Content Include="Resources\LESS\Layout\IO.less" />
     <Content Include="Resources\LESS\IO\Game.less" />
     <Content Include="Resources\LESS\IO\Result.less" />
+    <Content Include="Resources\LESS\Layout\LF.less" />
+    <Content Include="Resources\LESS\Home\Games.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Resources\JS\Home\Games.js" />
     <Content Include="Scripts\jcanvas.min.js" />
@@ -358,9 +370,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Layout\Error.cshtml" />
-    <Content Include="Views\Layout\HomeTemp.cshtml" />
-    <Content Include="Views\Home\HomeTemp.cshtml" />
-    <Content Include="Views\Layout\Home.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -370,17 +379,18 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\IO\Main.cshtml" />
     <Content Include="Views\Layout\IO.cshtml" />
-    <Content Include="Views\Layout\HomeTempMain.cshtml" />
-    <Content Include="Views\Home\Entry.cshtml" />
-    <Content Include="Views\Home\Games.cshtml" />
-    <Content Include="Views\Home\MainTemp.cshtml" />
-    <Content Include="Views\Home\Registration.cshtml" />
-    <Content Include="Views\LF\Main.cshtml" />
     <Content Include="Views\IO\Game.cshtml" />
     <Content Include="Views\IO\Result.cshtml" />
+    <Content Include="Views\LF\Game.cshtml" />
+    <Content Include="Views\Layout\Home.cshtml" />
+    <Content Include="Views\Layout\LF.cshtml" />
+    <Content Include="Views\Home\Entry.cshtml" />
+    <Content Include="Views\Home\Games.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\LF\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,7 +16,7 @@ namespace TP.DAL.EF
 
         public DbSet<Game> Games { get; set; }
 
-        public DbSet<GameSession> GamingSessions { get; set; }
+        public DbSet<GameSession> GameSession { get; set; }
         public DbSet<GameGamer> GameGamers { get; set; }
 
         public DbSet<Image> Images { get; set; }
@@ -31,6 +31,17 @@ namespace TP.DAL.EF
         public DbSet<SystemName> SystemNames { get; set; }
 
         /* Interesting Opinion */
+
+        public DbSet<IO_GameSession> IO_GameSessions { get; set; }
+        public DbSet<IO_GameGamer> IO_GameGamers { get; set; }
+
+        public DbSet<IO_Attribute> IO_Attributes { get; set; }
+        public DbSet<IO_Feature> IO_Features { get; set; }
+        public DbSet<IO_Task> IO_Tasks { get; set; }
+        public DbSet<IO_FeatureAttribute> IO_FeatureAttributes { get; set; }
+        public DbSet<IO_TaskAttribute> IO_TaskAttribute { get; set; }
+        public DbSet<IO_GameTask> IO_GameTasks { get; set; }
+        public DbSet<IO_Answer> IO_Answers { get; set; }
 
     }
 }

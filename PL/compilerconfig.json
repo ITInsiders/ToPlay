@@ -12,6 +12,30 @@
     "inputFile": "Resources/LESS/Home/Main.less"
   },
   {
+    "outputFile": "Resources/CSS/Home/Games.css",
+    "inputFile": "Resources/LESS/Home/Games.less"
+  },
+  {
+    "outputFile": "Resources/CSS/Home/Entry.css",
+    "inputFile": "Resources/LESS/Home/Entry.less"
+  },
+  {
+    "outputFile": "Resources/CSS/Home/Registration.css",
+    "inputFile": "Resources/LESS/Home/Registration.less"
+  },
+  {
+    "outputFile": "Resources/CSS/Layout/LF.css",
+    "inputFile": "Resources/LESS/Layout/LF.less"
+  },
+  {
+    "outputFile": "Resources/CSS/LF/Main.css",
+    "inputFile": "Resources/LESS/LF/Main.less"
+  },
+  {
+    "outputFile": "Resources/CSS/LF/Game.css",
+    "inputFile": "Resources/LESS/LF/Game.less"
+  },
+  {
     "outputFile": "Resources/CSS/Layout/IO.css",
     "inputFile": "Resources/LESS/Layout/IO.less"
   },

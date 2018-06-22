@@ -22,21 +22,26 @@ namespace TP.PL.Helpers
             SetLanguage(LNG);
         }
 
-        private void GetLanguageInCookies()
+        public static Languages GetLanguages()
         {
             if (HC.Request.Cookies["_language"] != null)
             {
                 switch (HC.Request.Cookies["_language"].Value)
                 {
-                    case "De": this.LNG = Languages.De; break;
-                    case "Ru": this.LNG = Languages.Ru; break;
-                    default: this.LNG = Languages.En; break;
+                    case "De": return Languages.De;
+                    case "Ru": return Languages.Ru;
+                    default: return Languages.En;
                 }
             }
             else
             {
-                this.LNG = Languages.En;
+                return Languages.En;
             }
+        }
+
+        private void GetLanguageInCookies()
+        {
+            this.LNG = GetLanguage();
         }
 
         public void SetLanguage(Languages LNG)

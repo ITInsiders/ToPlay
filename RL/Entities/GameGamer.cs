@@ -12,12 +12,13 @@ namespace TP.ML.Entities
     public class GameGamer
     {
         [Key]
-        public long Id { get; set; }
-
+        [Column(Order = 1)]
         [ForeignKey("Gamer")]
         public long GamerId { get; set; }
         public Gamer Gamer { get; set; }
-        
+
+        [Key]
+        [Column(Order = 2)]
         [ForeignKey("GameSession")]
         public long? GameSessionId { get; set; }
         public GameSession GameSession { get; set; }
