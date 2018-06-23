@@ -184,7 +184,6 @@ namespace TP.PL.Hubs
 
                     Clients.Clients(GamersId(gamer))
                         .SetAnswers(game.Answers.Select(x => new JsonAnswer(x)).ToList());
-
                 }
             }
             else

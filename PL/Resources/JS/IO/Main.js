@@ -19,7 +19,6 @@ function SendSelect(element) {
     var Gamer = $(".Gamer.Select");
     
     var Id = Gamer.attr("key");
-    //console.log(Id);
     Hub.server.setAnswer(Id);
 
     $(".Gamer.SelectSave").removeClass("SelectSave");
@@ -87,6 +86,7 @@ function SetTask(JsonTask) {
         .append(Data.Button.Lose.clone());
 }
 function SetAnswers(JsonAnswers) {
+    $("#Gamers").removeClass("Task").addClass("Answer");
     JsonAnswers.forEach(function (v, i) {
 
     });

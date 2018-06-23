@@ -269,7 +269,6 @@
     <Content Include="Resources\JS\Constellation.js" />
     <Content Include="Resources\JS\Home\Games2.js" />
     <Content Include="Resources\JS\IO\Main.js" />
-    <Content Include="Resources\JS\IO\SignalR.js" />
     <Content Include="Resources\JS\Layout\Home.js" />
     <Content Include="Resources\IMG\System\ToPlayFox.psd" />
     <Content Include="Resources\Fonts\BebasNeueBold.otf" />
