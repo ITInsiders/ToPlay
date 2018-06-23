@@ -3,6 +3,7 @@
     PageInfo Info = (PageInfo)ViewBag.Info;
     Layout = Info.LayoutHref;
 }
+<script>var Id = @ViewBag.Id;</script>
 <div id="Data" class="hidden" data-view="@Info.View" data-controller="@Info.Controller" data-id="@ViewBag.Id">
     <div id="Waiting">
         <span>@Info.Language.Get("waiting")</span>
@@ -27,6 +28,7 @@
     </button>
     <button type="button" id="Lose" onclick="SendLose(this);">
         <span class="Lose">@Info.Language.Get("lose")</span>
+        <span class="Exit">@Info.Language.Get("exit")</span>
     </button>
 </div>
 <div id="Template" class="hidden">
@@ -34,13 +36,25 @@
         <div class="Info" onclick="SetSelect(this);">
             <div class="Image"></div>
             <div class="Name"><span></span></div>
-            <div class="Answer">
-                <span class="Login"></span>
-                <hr />
-                <span>+</span>
-                <span class="Coins"></span>
-                <span>@Info.Language.Get("coins")</span>
-            </div>
+        </div>
+    </div>
+
+    <div class="Answer">
+        <span class="Login"></span>
+        <hr />
+        <span class="AnswerCoins">
+            <span>+</span>
+            <span class="Coins"></span>
+            <span>@Info.Language.Get("coins")</span>
+        </span>
+    </div>
+
+    <div class="Characteristic">
+        <div class="Title">
+            <span>@Info.Language.Get("characteristic")</span>
+        </div>
+        <div class="Text">
+            <span>@Info.Language.Get("you can persuade anyone")</span>
         </div>
     </div>
 </div>

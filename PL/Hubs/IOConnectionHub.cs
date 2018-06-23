@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using TP.BL.Services;
@@ -21,7 +23,7 @@ namespace TP.PL.Hubs
 
         public ConnectGamer Gamer() => Gamer(Context.ConnectionId);
         public ConnectGamer Gamer(string Id) => Games.SelectMany(x => x.Gamers).FirstOrDefault(x => x.Id == Id);
-        public ConnectGamer GamerById(long Id) => Games.SelectMany(x => x.Gamers).FirstOrDefault(x => x.GameId == Id);
+        public ConnectGamer GamerById(long Id) => Games.SelectMany(x => x.Gamers).FirstOrDefault(x => x.GamerId == Id);
 
         public List<string> GamersId() => Gamer()?.Game.Gamers.Select(x => x.Id).ToList();
         public List<string> GamersId(ConnectGamer gamer) => gamer?.Game.Gamers.Select(x => x.Id).ToList();
@@ -37,19 +39,31 @@ namespace TP.PL.Hubs
             }
             else if (Games.Count() > 0)
             {
-                key = Games.Max(x => x.Id) + 1;
+                long minKey = Games.Min(x => x.Id);
+                if (minKey > 1) key = minKey - 1;
+                else
+                {
+                    foreach(long valueKey in Games.Select(x => x.Id))
+                    {
+                        if (valueKey == key) key++;
+                        else break;
+                    }
+                }
             }
             return key;
         }
 
-        private ConnectGamer SearchGamer(long Id, Gamer gamer)
+        private static Mutex MutexGame = new Mutex();
+        private ConnectGamer Connection(long Id, Gamer gamer)
         {
             if (gamer == null) return null;
+
+            MutexGame.WaitOne();
 
             string ConnectionId = Context.ConnectionId;
             ConnectGamer connectGamer = Gamer(ConnectionId) ?? GamerById(gamer.Id);
             ConnectGame connectGame = connectGamer?.Game;
-
+            
             if (connectGamer == null)
             {
                 if (Id != 0)
@@ -61,8 +75,10 @@ namespace TP.PL.Hubs
                         connectGame = new ConnectGame(Id);
                         Games.Add(connectGame);
                     }
+                    else if (connectGame.Game.isRun) Id = 0;
                 }
-                else
+                
+                if (Id == 0)
                 {
                     connectGame = Games.FirstOrDefault(x => x.Gamers.Count < 8 && !x.Game.isRun);
 
@@ -86,19 +102,20 @@ namespace TP.PL.Hubs
             {
                 connectGamer.Id = ConnectionId;
             }
-                
+
+            MutexGame.ReleaseMutex();
+
             return connectGamer;
         }
 
-        public void Connect(long? TempGameId)
+        public void Connect(long GameId)
         {
-            long GameId = TempGameId ?? 0;
             Identity identity = new Identity();
 
             ConnectGamer connectGamer = null;
             if (identity.isAuth)
             {
-                connectGamer = SearchGamer(GameId, identity.User.Get<Gamer>());
+                connectGamer = Connection(GameId, identity.User.Get<Gamer>());
 
                 Clients.Caller.SetGame(new JsonGame(connectGamer.Game));
                 Clients.Caller.SetYou(new JsonGamer(connectGamer));
@@ -158,15 +175,23 @@ namespace TP.PL.Hubs
                 {
                     Value = game.Tasks[game.IndexTask].Value(LanguageDictionary.GetLanguages())
                 });
+                Thread TimerThread = new Thread(new ParameterizedThreadStart(TimerStart));
+                TimerThread.Start(gamer);
             }
         }
 
         public void SetAnswer(long RecipientId)
         {
             ConnectGamer gamer = Gamer();
+            SetAnswer(gamer.GamerId, RecipientId, gamer);
+        }
+
+        private void SetAnswer(long SenderId, long RecipientId, ConnectGamer gamer = null)
+        {
+            gamer = gamer ?? GamerById(SenderId);
             GameMechanic game = gamer.Game.Game;
 
-            IO_Answer answer = game.AddAnswer(gamer.GamerId, RecipientId);
+            IO_Answer answer = game.AddAnswer(SenderId, RecipientId);
 
             if (answer != null)
             {
@@ -180,10 +205,10 @@ namespace TP.PL.Hubs
                     foreach (Gamer g in game.Gamers) g.Ready = false;
 
                     Clients.Clients(GamersId(gamer))
-                        .SetGamers(gamer.Game.Gamers.Select(x => new JsonGamer(x)).ToList());
+                        .SetAnswers(game.Answers.Select(x => new JsonAnswer(x)).ToList());
 
                     Clients.Clients(GamersId(gamer))
-                        .SetAnswers(game.Answers.Select(x => new JsonAnswer(x)).ToList());
+                        .SetGamers(gamer.Game.Gamers.Select(x => new JsonGamer(x)).ToList());
                 }
             }
             else
@@ -204,8 +229,28 @@ namespace TP.PL.Hubs
             Clients.Clients(GamersId(gamer)).SetResult(results);
         }
 
-        public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
+        protected void TimerStart(object Object)
         {
+            ConnectGamer gamer = (ConnectGamer)Object;
+            GameMechanic game = gamer.Game.Game;
+            ConnectGame cgame = gamer.Game;
+            int time = 60;
+            do
+            {
+                Clients.Clients(GamersId(gamer)).SetTimer(time--);
+                Thread.Sleep(1000);
+            } while (time >= 0 && !game.IsAllAnswer);
+
+            foreach(Gamer item in game.Gamers.Where(x => x.Answers.Count() == game.IndexTask))
+            {
+                SetAnswer(item.Id, item.Id);
+            }
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            MutexGame.WaitOne();
+
             ConnectGamer gamer = Gamer();
             
             if (gamer != null)
@@ -214,16 +259,20 @@ namespace TP.PL.Hubs
 
                 ConnectGame connectGame = gamer.Game;
                 GameMechanic game = connectGame.Game;
-
-                connectGame.Gamers.Remove(gamer);
-                game.RemoveGamer(gamer.GameId);
-
-                if (game.Gamers.Count() == 0)
+                
+                if (connectGame.Gamers.Count() == 1)
                 {
                     Keys.Add(game.Id);
                     Games.Remove(connectGame);
                 }
+                else
+                {
+                    game.RemoveGamer(gamer.GamerId);
+                    connectGame.Gamers.Remove(gamer);
+                }
             }
+
+            MutexGame.ReleaseMutex();
 
             return base.OnDisconnected(stopCalled);
         }

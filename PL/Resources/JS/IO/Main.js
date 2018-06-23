@@ -24,13 +24,23 @@ function SendSelect(element) {
     $(".Gamer.SelectSave").removeClass("SelectSave");
     Gamer.addClass("SelectSave");
 }
+function ClearGamer(Id = null) {
+    var Gamer = Id != null ? $(`#Gamer${Id}`) : $(".Gamer");
+    $("#Gamers").removeClass(["Waiting", "Task", "Answer", "Result"]);
+    Gamer.removeClass(["Select", "SelectSave"]);
+    Gamer.find(".Answer").remove();
+    Gamer.find(".Result").remove();
+    return Gamer;
+}
 
 function SetYou(JsonYou) {
     You = JsonYou;
+    UpdateGamer(You)
 }
 function SetGame(JsonGame) {
     for (var v in JsonGame) Data.Game[v] = JsonGame[v];
     ReplaceHref(`/IO/${JsonGame.Id}`);
+    ClearGamer();
     $("#Gamers").addClass("Waiting");
 
     $("#Info").empty()
@@ -55,17 +65,18 @@ function DeleteGamer(Id) {
     $(`#Gamer${Id}`).remove();
 }
 function UpdateGamer(JsonGamer) {
+    if (You.Id == JsonGamer.Id) {
+        You = JsonGamer;
+        $("#Coins .Coins").text(JsonGamer.Coins);
+        JsonGamer.Ready ? $("#Ready").attr("id", "Pause") : $("#Pause").attr("id", "Ready");
+    }
+
     var Gamer = $(`#Gamer${JsonGamer.Id}`);
 
     Gamer.find(".Image").css("background-image", `url("${JsonGamer.URL}")`);
     Gamer.find(".Name span").text(JsonGamer.Login);
 
     JsonGamer.Ready ? Gamer.addClass("Ready") : Gamer.removeClass("Ready");
-
-    if (JsonGamer.Id == You.Id) {
-        $("#Coins .Coins").text(JsonGamer.Coins);
-        JsonGamer.Ready ? $("#Ready").attr("id", "Pause") : $("#Pause").attr("id", "Ready");
-    }
 }
 function SetReady(JsonGamer) {
     var Gamer = $("#Gamer" + JsonGamer.Id);
@@ -73,7 +84,8 @@ function SetReady(JsonGamer) {
     else UpdateGamer(JsonGamer);
 }
 function SetTask(JsonTask) {
-    $("#Gamers").removeClass(["Waiting", "Answer"]).addClass("Task");
+    ClearGamer();
+    $("#Gamers").addClass("Task");
 
     $("#Title span").text(JsonTask.Value);
 
@@ -86,17 +98,58 @@ function SetTask(JsonTask) {
         .append(Data.Button.Lose.clone());
 }
 function SetAnswers(JsonAnswers) {
-    $("#Gamers").removeClass("Task").addClass("Answer");
-    JsonAnswers.forEach(function (v, i) {
+    ClearGamer();
 
+    $("#Info").empty()
+        .append(Data.Div.Coins.clone())
+        .append(Data.Div.Waiting.clone());
+    $("#Buttons").empty()
+        .append(Data.Button.Ready.clone())
+        .append(Data.Button.Lose.clone());
+
+    $("#Gamers").addClass("Answer");
+
+    var hide = JsonAnswers.length < 2;
+    console.log(hide);
+    JsonAnswers.forEach(function (v, i) {
+        var Sender = $(`#Gamer${v.SenderId}`),
+            Recipient = $(`#Gamer${v.RecipientId}`),
+            RecipientLogin = Recipient.find(".Name span").text(),
+            Answer = Sender.find(".Info .Image .Answer");
+
+        Sender.removeClass(["Select", "SelectSave"]);
+
+        Answer = Data.Gamer.Answer.clone();
+        Answer.find(".Login").text(RecipientLogin);
+
+        if (hide) Answer.find(".AnswerCoins").addClass("hidden");
+        else {
+            Answer.find(".AnswerCoins").removeClass("hidden");
+            Answer.find(".Coins").text(v.Coins);
+        }
+
+        Sender.find(".Info .Image").append(Answer);
     });
-    $("Gamers").removeClass("Task").addClass("Answer");
+}
+function SetTimer(Time) {
+    $("#Timer .Time").text(Time);
 }
 function SetResult(Results) {
+    ClearGamer();
+    $("#Gamers").addClass("Result");
 
+    $("#Info").empty();
+    $("#Buttons").empty()
+        .append(Data.Button.Lose.clone());
+
+    $("#Lose").attr("id", "Exit")
+
+    Results.forEach(function (v, i) {
+        $(`#Gamer${v.Id} .Characteristic .Text span`).text(v.Feature);
+    });
 }
 function Auth() {
-
+    window.location.href = "/Home/Entry";
 }
 function Reload() {
     window.location.reload();
@@ -115,7 +168,8 @@ Hub.client.setAnswers = SetAnswers;
 Hub.client.setResult = SetResult;
 Hub.client.auth = Auth;
 Hub.client.reload = Reload;
+Hub.client.setTimer = SetTimer;
 
 $.connection.hub.start().done(function () {
-    Hub.server.connect(Data.Game.Id);
+    Hub.server.connect(Id);
 });

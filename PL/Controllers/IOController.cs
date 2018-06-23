@@ -15,7 +15,7 @@ namespace TP.PL.Controllers
         public ActionResult Main(string Id = null)
         {
             ViewBag.Info = pageInfo.setView("Main");
-            ViewBag.Id = Id;
+            ViewBag.Id = Id ?? "0";
             return View();
         }
 
@@ -23,7 +23,7 @@ namespace TP.PL.Controllers
         public ActionResult Main(object Object, string Id = null)
         {
             ViewBag.Info = pageInfo.setView("Main").setPart(true);
-            ViewBag.Id = Id;
+            ViewBag.Id = Id ?? "0";
             return View();
         }
     }

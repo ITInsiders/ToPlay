@@ -43,6 +43,41 @@
   border-radius: 0;
   transition: 0.5s ease-in-out;
 }
+.Content #Gamers .Gamer .Info .Image .Answer {
+  position: absolute;
+  bottom: 10px;
+  left: 5%;
+  min-height: 30px;
+  width: 90%;
+  background-color: #ffffff;
+  transition: .5s;
+  transform: scale(1, 1);
+  border-radius: 5px;
+  outline: 1px solid #2e2d3e;
+  z-index: 3;
+}
+.Content #Gamers .Gamer .Info .Image .Answer,
+.Content #Gamers .Gamer .Info .Image .Answer span {
+  color: #2e2d3e;
+}
+.Content #Gamers .Gamer .Info .Image .Answer .CountCoints {
+  font-size: 25px;
+}
+.Content #Gamers .Gamer .Info .Image .Answer hr {
+  margin: 0;
+}
+.Content #Gamers .Gamer .Info .Image .Answer:before {
+  position: absolute;
+  content: "▼";
+  bottom: -8px;
+  left: calc(50% - 5px);
+  font-size: 15px;
+  height: 10px;
+  line-height: 10px;
+  color: #ffffff;
+  text-shadow: 0 2px 0 #2e2d3e;
+  transition: .5s;
+}
 .Content #Gamers .Gamer .Info .Name {
   border-top: 3px solid #ffffff;
   position: relative;

@@ -23,8 +23,8 @@ namespace TP.BL.IO.Actions
         public List<IO_GameGamer> GameGamers => Game.GameGamers.Select(x => x.Get<IO_GameGamer>()).ToList();
         public IO_GameGamer GameGamer(long Id) => GameGamers.FirstOrDefault(x => x.GamerId == Id);
         public List<IO_Task> Tasks => Game.GameTasks.Select(x => x.Task).ToList();
-        public IO_Task LastTask => Tasks.LastOrDefault();
-        public List<IO_Answer> Answers => LastTask.Answers;
+        public IO_Task Task => Tasks[IndexTask];
+        public List<IO_Answer> Answers => Task.Answers;
 
 
         private void AddTasks()
@@ -101,16 +101,16 @@ namespace TP.BL.IO.Actions
             return Game.Id;
         }
 
-        public bool IsAllAnswer => Gamers.Count() == LastTask.Answers.Count();
+        public bool IsAllAnswer => Gamers.Count() == Answers.Count();
         public IO_Answer AddAnswer(long SenderId, long RecipientId)
         {
             Gamer Sender = Gamer(SenderId);
             Gamer Recipient = Gamer(RecipientId);
 
-            if (Sender != null && Recipient != null && LastTask != null)
+            if (Sender != null && Recipient != null && Task != null)
             {
                 IO_Answer answer =
-                    LastTask.Answers.FirstOrDefault(x => x.SenderId == SenderId);
+                    Task.Answers.FirstOrDefault(x => x.SenderId == SenderId);
 
                 if (answer == null)
                 {
@@ -120,13 +120,17 @@ namespace TP.BL.IO.Actions
                         SenderId = SenderId,
                         Recipient = Recipient,
                         RecipientId = RecipientId,
-                        Task = LastTask,
-                        TaskId = LastTask.Id
+                        Task = Task,
+                        TaskId = Task.Id
                     };
 
                     Sender.Answers.Add(answer);
                     Recipient.Answers.Add(answer);
-                    LastTask.Answers.Add(answer);
+                    Task.Answers.Add(answer);
+                } else
+                {
+                    answer.Recipient = Recipient;
+                    answer.RecipientId = RecipientId;
                 }
 
                 return answer;
@@ -134,11 +138,15 @@ namespace TP.BL.IO.Actions
 
             return null;
         }
+
         public void CalculatorCoints()
         {
             List<IO_Answer> answers = Answers;
             foreach (IO_Answer answer in answers)
-                answer.Sender.Coins = 50 * Math.Max(answers.Where(x => x.RecipientId == answer.RecipientId).Count() - 1, 0);
+            {
+                answer.Coins = 25 * Math.Max(answers.Where(x => x.RecipientId == answer.RecipientId).Count() - 1, 0);
+                answer.Sender.Coins += answer.Coins;
+            }
         }
 
         public bool IsAllTask => Tasks.Count() == IndexTask;

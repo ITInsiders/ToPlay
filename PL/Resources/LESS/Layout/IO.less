@@ -87,7 +87,7 @@ body {
 
                 #Waiting:before {
                     width: 5px;
-                    animation: 2s waiting infinite ease-in-out;
+                    animation: 2s waiting infinite linear;
                 }
 
                 #Timer:before {
@@ -156,6 +156,14 @@ body {
                 }
 
                 #Change .Send {
+                    display: none;
+                }
+
+                #Lose .Exit {
+                    display: none;
+                }
+
+                #Exit .Lose {
                     display: none;
                 }
             }

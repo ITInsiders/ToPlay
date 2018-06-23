@@ -29,5 +29,7 @@ namespace TP.ML.IOEntities
         [ForeignKey("Task")]
         public long TaskId { get; set; }
         public virtual IO_Task Task { get; set; }
+
+        public int Coins { get; set; }
     }
 }

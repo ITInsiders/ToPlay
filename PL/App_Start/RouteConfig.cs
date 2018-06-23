@@ -15,14 +15,14 @@ namespace TP
 
             routes.MapRoute(
                 name: "LF",
-                url: "LF/{key}",
-                defaults: new { controller = "LF", action = "Main", key = UrlParameter.Optional }
+                url: "LF/{Id}",
+                defaults: new { controller = "LF", action = "Main", Id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
                 name: "IO",
-                url: "IO/{key}",
-                defaults: new { controller = "IO", action = "Main", key = UrlParameter.Optional }
+                url: "IO/{Id}",
+                defaults: new { controller = "IO", action = "Main", Id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

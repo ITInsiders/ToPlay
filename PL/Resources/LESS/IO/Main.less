@@ -51,6 +51,45 @@
                             border-radius: 0;
                             transition: .5s ease-in-out;
                         }
+
+                        .Answer {
+                            position: absolute;
+                            bottom: 10px;
+                            left: 5%;
+                            min-height: 30px;
+                            width: 90%;
+                            background-color: @basecolor-white;
+                            transition: .5s;
+                            transform: scale(1, 1);
+                            border-radius: 5px;
+                            outline: 1px solid @basecolor-darkgrayblue;
+                            z-index: 3;
+
+                            &, & span {
+                                color: @basecolor-darkgrayblue;
+                            }
+
+                            .CountCoints {
+                                font-size: 25px;
+                            }
+
+                            hr {
+                                margin: 0;
+                            }
+
+                            &:before {
+                                position: absolute;
+                                content: "▼";
+                                bottom: -8px;
+                                left: calc(~"50% - 5px");
+                                font-size: 15px;
+                                height: 10px;
+                                line-height: 10px;
+                                color: @basecolor-white;
+                                text-shadow: 0 2px 0 @basecolor-darkgrayblue;
+                                transition: .5s;
+                            }
+                        }
                     }
 
                     .Name {

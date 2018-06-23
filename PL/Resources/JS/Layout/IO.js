@@ -5,7 +5,7 @@ $(document).ready(Ready);
 function Ready() {
 
     Data.Game = {};
-    Data.Game.Id = $("#Data").data("id");
+    Data.Game.Id = Id;
     Data.Game.View = $("#Data").data("view");
     Data.Game.Controller = $("#Data").data("controller");
 
@@ -19,6 +19,8 @@ function Ready() {
     });
 
     Data.Gamer = $("#Template .Gamer").clone();
+    Data.Gamer.Answer = $("#Template .Answer").clone();
+    Data.Gamer.Characteristic = $("#Template .Gamer .Characteristic").clone();
 
     $("#Data").remove();
     $("#Template").remove();
