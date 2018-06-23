@@ -21,6 +21,7 @@ namespace TP.ML.IOEntities
         public IO_GameSession()
         {
             GameTasks = new List<IO_GameTask>();
+            GameGamers = new List<GameGamer>();
         }
     }
 }

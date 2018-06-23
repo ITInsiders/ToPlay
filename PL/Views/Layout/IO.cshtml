@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="Right">
-                <div class="Info">
+                <div class="Group" id="Info">
                 </div>
-                <div class="Buttons">
+                <div class="Group" id="Buttons">
                 </div>
             </div>
         </div>
@@ -41,7 +41,6 @@
     <footer></footer>
     @Scripts.Render("~/bundles/DefaultScripts")
     <script src="~/signalr/hubs"></script>
-    <script src="~/Resources/JS/IO/SignalR.js"></script>
     @Scripts.Render(Info.ScriptController)
     @Scripts.Render(Info.ScriptView)
     @RenderSection("Scripts", required: false)

@@ -54,7 +54,7 @@ body {
                 }
             }
 
-            .Info {
+            #Info {
                 display: inline-block;
 
                 div {
@@ -85,18 +85,18 @@ body {
                     }
                 }
 
-                .Waiting:before {
+                #Waiting:before {
                     width: 5px;
                     animation: 2s waiting infinite ease-in-out;
                 }
 
-                .Timer:before {
+                #Timer:before {
                     width: 0;
                     animation: 60s timer forwards;
                 }
             }
 
-            .Buttons {
+            #Buttons {
                 display: inline-block;
                 margin-left: 5px;
 
@@ -142,6 +142,22 @@ body {
                         border-radius: 0;
                     }
                 }
+
+                #Ready .Pause {
+                    display: none;
+                }
+
+                #Pause .Ready {
+                    display: none;
+                }
+
+                #Send .Change {
+                    display: none;
+                }
+
+                #Change .Send {
+                    display: none;
+                }
             }
 
             @media (min-width: 792px) {
@@ -153,12 +169,12 @@ body {
                     float: right;
                     padding-right: 5px;
 
-                    .Info, .Buttons {
+                    #Info, #Buttons {
                         width: auto;
                         float: left;
                     }
 
-                    .Buttons {
+                    #Buttons {
                         margin-left: 10px;
                     }
                 }

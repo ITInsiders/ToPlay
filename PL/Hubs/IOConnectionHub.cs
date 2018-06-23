@@ -27,22 +27,19 @@ namespace TP.PL.Hubs
         public List<string> GamersId(ConnectGamer gamer) => gamer?.Game.Gamers.Select(x => x.Id).ToList();
 
         private static List<long> Keys = new List<long>();
-        private static long Key
+        private static long Key()
         {
-            get
+            long key = 1;
+            if (Keys.Count() > 0)
             {
-                long key = 1;
-                if (Keys.Count() > 0)
-                {
-                    key = Keys.Min();
-                    Keys.Remove(key);
-                }
-                else if (Games.Count() > 0)
-                {
-                    key = Games.Max(x => x.Id) + 1;
-                }
-                return key;
+                key = Keys.Min();
+                Keys.Remove(key);
             }
+            else if (Games.Count() > 0)
+            {
+                key = Games.Max(x => x.Id) + 1;
+            }
+            return key;
         }
 
         private ConnectGamer SearchGamer(long Id, Gamer gamer)
@@ -71,7 +68,7 @@ namespace TP.PL.Hubs
 
                     if (connectGame == null)
                     {
-                        connectGame = new ConnectGame(Key);
+                        connectGame = new ConnectGame(Key());
                         Games.Add(connectGame);
                     }
                 }
@@ -130,7 +127,7 @@ namespace TP.PL.Hubs
                 if (gamer.Game.Gamers.All(x => x.Gamer.Ready))
                 {
                     if (!game.isRun) StartGame(gamer);
-                    else SetTask(gamer);
+                    else if (game.IsAllAnswer) SetTask(gamer);
                 }
             }
             else
@@ -168,11 +165,13 @@ namespace TP.PL.Hubs
         {
             ConnectGamer gamer = Gamer();
             GameMechanic game = gamer.Game.Game;
-            IO_Answer answer = game.AddAnswer(gamer.GameId, RecipientId);
+
+            IO_Answer answer = game.AddAnswer(gamer.GamerId, RecipientId);
 
             if (answer != null)
             {
                 bool All = game.IsAllAnswer;
+
                 if (!All)
                     Clients.Caller.SetAnswers(new List<JsonAnswer>() { new JsonAnswer(answer) });
                 else
@@ -190,7 +189,7 @@ namespace TP.PL.Hubs
             }
             else
             {
-                Clients.Caller.Reload()
+                Clients.Caller.Reload();
             }
         }
 
@@ -212,7 +211,7 @@ namespace TP.PL.Hubs
             
             if (gamer != null)
             {
-                Clients.Clients(GamersId(gamer)).DeleteGamer(gamer.GameId);
+                Clients.Clients(GamersId(gamer)).DeleteGamer(gamer.GamerId);
 
                 ConnectGame connectGame = gamer.Game;
                 GameMechanic game = connectGame.Game;

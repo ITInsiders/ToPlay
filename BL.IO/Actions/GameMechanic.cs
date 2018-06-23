@@ -38,7 +38,7 @@ namespace TP.BL.IO.Actions
             for (int i = 0; i < Count && i < 9; ++i)
             {
                 int Index = 0;
-                do { Index = R.Next(0, Count); } while (!result.Any(x => x.Id == tasks[Index].Id));
+                do { Index = R.Next(0, Count); } while (result.Any(x => x.Id == tasks[Index].Id));
                 result.Add(tasks[Index]);
             }
 
@@ -58,7 +58,7 @@ namespace TP.BL.IO.Actions
             this.IndexTask = -1;
             this.isRun = false;
             this.isEnd = false;
-            Game = new IO_GameSession();
+            this.Game = new IO_GameSession();
             AddTasks();
         }
 
@@ -82,7 +82,8 @@ namespace TP.BL.IO.Actions
                         {
                             answer.SenderId = null;
                             answer.Sender = null;
-                        } else
+                        }
+                        else
                         {
                             task.Answers.Remove(answer);
                         }
@@ -100,7 +101,7 @@ namespace TP.BL.IO.Actions
             return Game.Id;
         }
 
-        public bool IsAllAnswer => Gamers.Count() == LastTask.Answers.Count(); 
+        public bool IsAllAnswer => Gamers.Count() == LastTask.Answers.Count();
         public IO_Answer AddAnswer(long SenderId, long RecipientId)
         {
             Gamer Sender = Gamer(SenderId);
@@ -111,12 +112,7 @@ namespace TP.BL.IO.Actions
                 IO_Answer answer =
                     LastTask.Answers.FirstOrDefault(x => x.SenderId == SenderId);
 
-                if (answer != null)
-                {
-                    answer.Recipient = Recipient;
-                    answer.RecipientId = RecipientId;
-                }
-                else
+                if (answer == null)
                 {
                     answer = new IO_Answer()
                     {
@@ -142,7 +138,7 @@ namespace TP.BL.IO.Actions
         {
             List<IO_Answer> answers = Answers;
             foreach (IO_Answer answer in answers)
-                answer.Sender.Coint = 50 * answers.Where(x => x.RecipientId == answer.RecipientId).Count();
+                answer.Sender.Coins = 50 * Math.Max(answers.Where(x => x.RecipientId == answer.RecipientId).Count() - 1, 0);
         }
 
         public bool IsAllTask => Tasks.Count() == IndexTask;
@@ -159,7 +155,7 @@ namespace TP.BL.IO.Actions
                     .Get(x => x.FeatureAttributes.All(z => attributes.Any(a => a.Id == z.AttributeId)))
                     .OrderByDescending(x => x.FeatureAttributes.Count()).ToList();
 
-                foreach(IO_Feature feature in features)
+                foreach (IO_Feature feature in features)
                     results.Add(new Result() { Gamer = gamer, Feature = feature, Count = feature.FeatureAttributes.Count() });
             }
 
@@ -180,187 +176,5 @@ namespace TP.BL.IO.Actions
             return results;
         }
 
-        
-        /*
-        public long GameId { get; set; }
-        public IOGameSession Game { get; set; }
-        public int Level { get; set; }
-        public string Page { get; set; }
-
-        public Dictionary<long, IOGameGamer> Gamers =>
-            Game.GameGamers.Select(x => x.Get<IOGameGamer>()).GroupBy(x => x.GamerId).ToDictionary(x => x.First().GamerId, y => y.First());
-        public Dictionary<long, IOGameTask> GameTasks =>
-            Game.GameTasks.ToDictionary(x => x.TaskId, y => y);
-        public Dictionary<long, IOTask> Tasks =>
-            Game.GameTasks.Select(x => x.Task).ToDictionary(x => x.Id, y => y);
-
-        public IOTask LastTask => 
-            Game.GameTasks.LastOrDefault()?.Task;
-        public bool IsAllAnswers =>
-            LastTaskAnswers.Count == Gamers.Count();
-        public List<IOAnswer> LastTaskAnswers =>
-            Gamers.Values
-            .Select(x => x.Answers.LastOrDefault())
-            .Where(x => (x?.TaskId ?? 0) == (LastTask?.Id ?? 0))
-            .ToList();
-
-        public GameMechanic(long GameId)
-        {
-            this.GameId = GameId;
-
-            Game = new IOGameSession()
-            {
-                GameId = 2,
-                GameGamers = new List<GameGamer>(),
-                GameTasks = new List<IOGameTask>()
-            };
-
-            Level = 0;
-            Page = "/IO/Main";
-        }
-
-        private Object GamerLock = new Object();
-        public void AddGamer(long GamerId)
-        {
-            lock (GamerLock)
-            {
-                IOGameGamer gamer = new IOGameGamer()
-                {
-                    GamerId = GamerId,
-                    Gamer = Service<Gamer>.I.Get(GamerId),
-                    GameSession = Game
-                };
-                
-                Game.GameGamers.Add(gamer);
-            }
-        }
-        public void RemoveGamer(long GamerId)
-        {
-            lock (GamerLock)
-            {
-                IOGameGamer gamer = Gamers[GamerId];
-
-                Game.GameGamers.Remove(gamer);
-
-                if (Game.GameGamers.Count() == 0)
-                    GamesRepository.RemoveGame(GameId);
-            }
-        }
-
-        public void SaveGame()
-        {
-            Service<IOGameSession> service = Service<IOGameSession>.I;
-            service.Create(Game);
-            service.SaveFromDataBase();
-
-            GamesRepository.RemoveGame(GameId);
-        }
-
-        public IOTask NewTasks()
-        {
-
-            if (Tasks.Count() < 12)
-            {
-                Random r = new Random();
-
-                List<IOTask> tasks = Service<IOTask>.I.Get(x => !Tasks.ContainsKey(x.Id));
-                IOTask task = tasks[r.Next(tasks.Count() - 1)];
-
-                IOGameTask gameTask = new IOGameTask()
-                {
-                    GameSession = Game,
-                    Task = task,
-                    TaskId = task.Id
-                };
-
-                Game.GameTasks.Add(gameTask);
-
-                return task;
-            }
-            return null;
-        }
-
-        public IOAnswer SetAnswer(long SenderId, long RecipientId)
-        {
-            IOTask Task = Game.GameTasks.Last().Task;
-
-            IOGameGamer Sender = Gamers[SenderId];
-            IOGameGamer Recipient = Gamers[RecipientId];
-
-            IOAnswer answer = new IOAnswer()
-            {
-                Sender = Sender,
-                SenderId = SenderId,
-                Recipient = Recipient,
-                RecipientId = RecipientId,
-                Task = Task,
-                TaskId = Task.Id
-            };
-
-            Task.Answers.Add(answer);
-            Sender.Answers.Add(answer);
-            Recipient.Answers.Add(answer);
-
-            return answer;
-        }
-
-        public bool isResult => IsAllAnswers && Tasks.Count == 12;
-        public List<IOGameGamer> Result()
-        {
-            if (isResult)
-            {
-                foreach (IOGameGamer gamer in Gamers.Values)
-                {
-                    List<IOAnswer> answers = gamer.Answers.Where(x => x.RecipientId == gamer.Id).ToList();
-
-                    List<IOAdjective> adjectives = new List<IOAdjective>();
-
-                    foreach (IOTask task in answers.Select(x => x.Task))
-                        foreach (IOTaskAdjective TA in task.TaskAdjectives)
-                            adjectives.Add(TA.Adjective);
-
-                    List<IOCharacteristic> characteristics = Service<IOCharacteristic>.I.Get(
-                        x => x.CharacteristicAdjective.All(y => adjectives.Any(z => z.Id == y.AdjectiveId)));
-
-                    IOCharacteristic characteristic = characteristics
-                        .OrderByDescending(x => x.CharacteristicAdjective.Count()).FirstOrDefault();
-
-                    gamer.Characteristic = characteristic;
-                    gamer.CharacteristicId = characteristic.Id;
-                }
-
-                return Gamers.Values.ToList();
-            }
-            return null;
-        }
-
-        public JsonGame JsonGame => new JsonGame()
-        {
-            Id = GameId,
-            Level = Level,
-            Page = Page
-        };
-
-        public List<JsonGamer> JsonGamers => Gamers.Values.Select(x => new JsonGamer() {
-            Id = x.Gamer.Id,
-            Login = x.Gamer.Login,
-            Coints = x.Coint,
-            Ready = x.Ready,
-            URL = x.Gamer.MainImage.URL
-        }).ToList();
-
-        public List<JsonResult> JsonResults => Result()
-            .Select(x => new JsonResult() { Id = x.Id, Login = x.Gamer.Login, Сharacteristic = x.Characteristic.En })
-            .ToList();
-
-        public List<JsonAnswer> JsonAnswers => LastTaskAnswers
-            .Select(x => new JsonAnswer()
-            {
-                Recipient = x.Recipient.Gamer.Login,
-                RecipientId = x.Recipient.Gamer.Id,
-                Sender = x.Sender.Gamer.Login,
-                SenderId = x.Sender.Gamer.Id
-            }).ToList();
     }
-    */
-    }
+}

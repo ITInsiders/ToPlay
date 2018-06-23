@@ -61,7 +61,7 @@ namespace TP.PL.Controllers
             if (ModelState.IsValid)
             {
                 Service<Gamer> ServiceGamer = Service<Gamer>.I;
-                Model.Password = Hash.GetHash(Hash.TypeHash.SHA512, Model.Password, Hash.GenerateSalt(Model.Login));
+                Model.Password = Hash.GetHash(Hash.TypeHash.SHA512, Model.Password, Hash.GenerateSalt(Model.Login.ToUpper()));
                 ServiceGamer.Create(Model.Gamer);
                 ServiceGamer.SaveFromDataBase();
                 return Redirect(Request.UrlReferrer.AbsolutePath);

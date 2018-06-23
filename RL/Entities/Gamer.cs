@@ -17,7 +17,7 @@ namespace TP.ML.Entities
         [NotMapped]
         public bool Ready { get; set; }
         [NotMapped]
-        public long Coint { get; set; }
+        public long Coins { get; set; }
 
         public virtual List<IO_Answer> Answers { get; set; }
     }

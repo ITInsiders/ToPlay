@@ -13,7 +13,7 @@ namespace TP.BL.IO.Models
         public string Login { get; set; }
         public string URL { get; set; }
         public bool Ready { get; set; }
-        public long Coints { get; set; }
+        public long Coins { get; set; }
 
         public JsonGamer()
         {
@@ -24,7 +24,7 @@ namespace TP.BL.IO.Models
         {
             Id = gamer.Gamer.Id;
             Login = gamer.Gamer.Login;
-            Coints = gamer.Gamer.Coint;
+            Coins = gamer.Gamer.Coins;
             Ready = gamer.Gamer.Ready;
             URL = gamer.Gamer.MainImage.URL;
         }

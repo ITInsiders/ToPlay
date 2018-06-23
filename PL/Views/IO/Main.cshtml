@@ -3,39 +3,42 @@
     PageInfo Info = (PageInfo)ViewBag.Info;
     Layout = Info.LayoutHref;
 }
-<div class="Data" data-view="@Info.View" data-controller="@Info.Controller">
-    <div class="HeaderTemp">
-        <div class="Info">
-            <div class="Waiting ">
-                <span>@Info.Language.Get("waiting")</span>
-            </div>
-        </div>
-        <div class="Buttons">
-            <button type="button" class="Ready" onclick="SendReady();">
-                <span class="Ready">@Info.Language.Get("ready")</span>
-                <span class="Pause hidden">@Info.Language.Get("pause")</span>
-            </button>
-            <button type="button" class="Lose">
-                <span>@Info.Language.Get("lose")</span>
-            </button>
-        </div>
+<div id="Data" class="hidden" data-view="@Info.View" data-controller="@Info.Controller" data-id="@ViewBag.Id">
+    <div id="Waiting">
+        <span>@Info.Language.Get("waiting")</span>
     </div>
+    <div id="Timer">
+        <span>@Info.Language.Get("time left")</span>:
+        <span class="Time"></span>
+        <span>@Info.Language.Get("s.")</span>
+    </div>
+    <div id="Coins">
+        <span class="Coins">0</span>
+        <span>@Info.Language.Get("coins")</span>
+    </div>
+
+    <button type="button" id="Ready" onclick="SendReady(this);">
+        <span class="Ready">@Info.Language.Get("ready")</span>
+        <span class="Pause">@Info.Language.Get("pause")</span>
+    </button>
+    <button type="button" id="Send" onclick="SendSelect(this);">
+        <span class="Send">@Info.Language.Get("send")</span>
+        <span class="Change">@Info.Language.Get("change")</span>
+    </button>
+    <button type="button" id="Lose" onclick="SendLose(this);">
+        <span class="Lose">@Info.Language.Get("lose")</span>
+    </button>
 </div>
-<div id="Template" style="display: none" data-id="@ViewBag.Id">
-    <div class="Element col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-        <div class="Gamer"
-             style="background-image: url('/Resources/IMG/System/ToPlayFox_250px.svg')">
+<div id="Template" class="hidden">
+    <div class="Gamer col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+        <div class="Info" onclick="SetSelect(this);">
+            <div class="Image"></div>
             <div class="Name"><span></span></div>
         </div>
     </div>
 </div>
-<div class="Waiting container">
-    <div class="row">
-        <div class="Gamers Case col-12">
-            <div class="Block">
-                <div class="Title"><span>@Info.Language.Get("gamers")</span></div>
-                <div class="List row justify-content-center" id="Gamers"></div>
-            </div>
-        </div>
-    </div>
+
+<div class="Content container">
+    <div class="row" id="Title"><span>@Info.Language.Get("waiting for players")</span></div>
+    <div class="row" id="Gamers"></div>
 </div>

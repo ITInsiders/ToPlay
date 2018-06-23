@@ -19,38 +19,11 @@ namespace TP.PL.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Game()
-        {
-            ViewBag.Info = pageInfo.setView("Game");
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult Result()
-        {
-            ViewBag.Info = pageInfo.setView("Result");
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult Main(object Object)
+        public ActionResult Main(object Object, string Id = null)
         {
             ViewBag.Info = pageInfo.setView("Main").setPart(true);
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Game(object Object)
-        {
-            ViewBag.Info = pageInfo.setView("Game").setPart(true);
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Result(object Object)
-        {
-            ViewBag.Info = pageInfo.setView("Result");
+            ViewBag.Id = Id;
             return View();
         }
     }

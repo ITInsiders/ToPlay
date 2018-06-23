@@ -1,80 +1,36 @@
-﻿$(document).ready(Ready);
+﻿var Data = {};
 
-var Data = {};
+$(document).ready(Ready);
 
 function Ready() {
-    initHashChange();
-    CalcData();
-}
 
-function initHashChange() {
-    $("a").click(function () {
-        var link = $(this),
-            href = link.attr("href");
+    Data.Game = {};
+    Data.Game.Id = $("#Data").data("id");
+    Data.Game.View = $("#Data").data("view");
+    Data.Game.Controller = $("#Data").data("controller");
 
-        getPage(href);
+    Data.Button = {};
+    Data.Div = {};
+
+    $("#Data").children().each(function (i, v) {
+        v = $(v);
+        if (v.attr("type") == "button") Data.Button[v.attr("id")] = v.clone();
+        else Data.Div[v.attr("id")] = v.clone();
     });
+
+    Data.Gamer = $("#Template .Gamer").clone();
+
+    $("#Data").remove();
+    $("#Template").remove();
 }
 
-function getPage(href) {
-    if (href.substr(0, 4) == "/IO/") {
-        if (getNameBrouser() == "gecko") {
-            //window.history.pushState(null, null, href);
-            window.history.replaceState(null, null, href);
-            getPageByHash(href);
-        } else {
-            window.location.hash = href;
-        }
+function ReplaceHref(href) {
+    if (getNameBrouser() == "gecko") {
+        window.history.replaceState(null, null, href);
     } else {
-        window.location.href = href;
+        window.location.hash = href;
     }
 }
-
-function getPageByHash(href) {
-    if (typeof (href) != "undefined" && href != "") {
-        $.ajax({
-            type: "POST",
-            dataType: "html",
-            cache: false,
-            async: false,
-            url: href,
-            success: function (data) {
-                setPage(data, href);
-            }
-        });
-    }
-}
-
-var setPage = function (data, href) {
-    $("#Page").html(data);
-    CalcData();
-    loadCSS();
-    loadJS();
-}
-
-var loadJS = function () {
-    $.ajax({
-        type: "GET",
-        url: "/Resources/JS/" + Data.PageInfo.Controller + "/" + Data.PageInfo.View + ".js",
-        dataType: "script",
-        cache: true,
-        async: false
-    });
-}
-
-var loadCSS = function () {
-    $("#TempLink").remove();
-    $("<link/>", {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "/Resources/CSS/" + Data.PageInfo.Controller + "/" + Data.PageInfo.View + ".min.css",
-    }).attr("id", "TempLink").appendTo("head");
-}
-
-window.addEventListener("popstate", function (e) {
-    getPage(location.pathname);
-});
-
 function getNameBrouser() {
     var userAgent = navigator.userAgent.toLowerCase();
     // Определим Internet Explorer
@@ -100,48 +56,3 @@ function getNameBrouser() {
 
     return "unknown";
 }
-
-function CalcData() {
-    var PageData = $("#Page .Data"),
-        HeaderTempChildren = PageData.find(".HeaderTemp").children();
-
-    HeaderTempChildren.each(function (i, e) {
-        var self = $(e),
-            parentSelf = $(".Header ." + self.attr("class"));
-        parentSelf.html(self.html());
-    });
-
-    Data.PageInfo = {};
-    Data.PageInfo.View = PageData.data("view");
-    Data.PageInfo.Controller = PageData.data("controller");
-
-    PageData.remove();
-}
-
-/*
-function InitLanguage() {
-
-}
-var Data = {};
-
-$(document).ready(() => {
-    initLanguageChange();
-});
-
-function initLanguageChange() {
-    Data.Language = $(".CustomSelect");
-    Data.Language.Value = Data.Language.find(".CustomValue");
-    Data.Language.Option = Data.Language.find(".CustomOption");
-    Data.Language.Options = Data.Language.Option.find("div");
-
-    Data.Language.Options.click(function () {
-        var Value = $(this).text();
-        Data.Language.Value.text(Value);
-        setServerLanguage(Value);
-    });
-};
-
-function setServerLanguage(Value) {
-    var posting = $.post("/Helper/ChangeLanguage", { language: Value });
-    posting.done(function () { location.reload(); });
-}*/

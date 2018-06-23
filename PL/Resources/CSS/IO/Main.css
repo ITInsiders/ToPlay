@@ -1,22 +1,154 @@
 ﻿/* - COLORS - */
 /* - FONTS - */
-.container.Waiting .Case {
+.Content #Title {
+  margin-bottom: 15px;
+}
+.Content #Title span {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+.Content #Gamers * {
+  transition: 0.5s ease-in-out;
+}
+.Content #Gamers .Gamer .Info {
+  position: relative;
+  background-color: #2e2d3e;
+  border: 3px solid #ffffff;
+  overflow: hidden;
+  border-radius: 0;
+}
+.Content #Gamers .Gamer .Info .Image {
+  position: relative;
+  width: 100%;
+  background-position-x: center;
+  background-position-y: top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.Content #Gamers .Gamer .Info .Image:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+.Content #Gamers .Gamer .Info .Image:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 100px #fe6d39;
+  border-radius: 0;
+  transition: 0.5s ease-in-out;
+}
+.Content #Gamers .Gamer .Info .Name {
+  border-top: 3px solid #ffffff;
+  position: relative;
+  width: 100%;
+  min-height: 25px;
+  line-height: 25px;
+  background-color: #ffffff;
+}
+.Content #Gamers .Gamer .Info .Name span {
+  color: #2e2d3e;
+}
+.Content #Gamers .Gamer .Info:hover {
+  border-color: #fe6d39;
+  border-radius: 2%;
+}
+.Content #Gamers .Gamer .Info:hover .Image {
+  background-size: 125%;
+}
+.Content #Gamers .Gamer .Info:hover .Image:after {
+  top: 2%;
+  left: 2%;
+  width: 96%;
+  height: 96%;
+  border-radius: 2%;
+}
+.Content #Gamers .Gamer .Info:hover .Name {
+  border-top-color: #fe6d39;
+  background-color: #fe6d39;
+}
+.Content #Gamers .Gamer .Info:hover .Name span {
+  color: #ffffff;
+}
+.Content #Gamers .Gamer.Ready .Info {
+  border-color: #158f07;
+  border-radius: 2%;
+}
+.Content #Gamers .Gamer.Ready .Info .Image:after {
+  box-shadow: 0 0 0 100px #158f07;
+  top: 2%;
+  left: 2%;
+  width: 96%;
+  height: 96%;
+  border-radius: 2%;
+}
+.Content #Gamers .Gamer.Ready .Info .Name {
+  border-top-color: #158f07;
+  background-color: #158f07;
+}
+.Content #Gamers .Gamer.Ready .Info .Name span {
+  color: #ffffff;
+}
+.Content #Gamers.Task .Gamer.Select .Info {
+  border-color: #fe6d39;
+  border-radius: 0;
+}
+.Content #Gamers.Task .Gamer.Select .Info .Image:after {
+  box-shadow: 0 0 0 100px #fe6d39;
+  top: 2%;
+  left: 2%;
+  width: 96%;
+  height: 96%;
+  border-radius: 0;
+}
+.Content #Gamers.Task .Gamer.Select .Info .Name {
+  border-top-color: #fe6d39;
+  background-color: #fe6d39;
+}
+.Content #Gamers.Task .Gamer.Select .Info .Name span {
+  color: #ffffff;
+}
+.Content #Gamers.Task .Gamer.SelectSave .Info {
+  border-color: #158f07;
+  border-radius: 2%;
+}
+.Content #Gamers.Task .Gamer.SelectSave .Info .Image:after {
+  box-shadow: 0 0 0 100px #158f07;
+  top: 2%;
+  left: 2%;
+  width: 96%;
+  height: 96%;
+  border-radius: 2%;
+}
+.Content #Gamers.Task .Gamer.SelectSave .Info .Name {
+  border-top-color: #158f07;
+  background-color: #158f07;
+}
+.Content #Gamers.Task .Gamer.SelectSave .Info .Name span {
+  color: #ffffff;
+}
+.Content .Case {
   margin-top: 15px;
 }
-.container.Waiting .Case .Block {
+.Content .Case .Block {
   padding: 20px 15px 5px 15px;
 }
-.container.Waiting .Case .List {
+.Content .Case .List {
   padding: 0 4px;
 }
-.container.Waiting .Case .List .Element {
+.Content .Case .List .Element {
   padding: 0 5px;
   margin: 5px 0;
 }
-.container.Waiting .Case .List .Element * {
+.Content .Case .List .Element * {
   transition: 0.5s ease-in-out;
 }
-.container.Waiting .Case .List .Element .Gamer {
+.Content .Case .List .Element .Gamer {
   position: relative;
   background-color: #2e2d3e;
   background-position-x: center;
@@ -27,15 +159,15 @@
   outline: 3px solid #ffffff;
   padding-bottom: 25px;
 }
-.container.Waiting .Case .List .Element .Gamer:hover {
+.Content .Case .List .Element .Gamer:hover {
   background-size: 150%;
 }
-.container.Waiting .Case .List .Element .Gamer:before {
+.Content .Case .List .Element .Gamer:before {
   content: "";
   display: block;
   padding-top: 100%;
 }
-.container.Waiting .Case .List .Element .Gamer:after {
+.Content .Case .List .Element .Gamer:after {
   position: absolute;
   top: 0;
   left: 0;
@@ -47,35 +179,35 @@
   border-radius: 0;
   transition: 0.5s ease-in-out;
 }
-.container.Waiting .Case .List .Element .Gamer:hover:after,
-.container.Waiting .Case .List .Element .Gamer.Select:after {
+.Content .Case .List .Element .Gamer:hover:after,
+.Content .Case .List .Element .Gamer.Select:after {
   top: 5%;
   left: 5%;
   width: 90%;
   height: calc(90% - 25px);
   border-radius: 50%;
 }
-.container.Waiting .Case .List .Element .Gamer .Name {
+.Content .Case .List .Element .Gamer .Name {
   position: absolute;
   left: 0;
   bottom: 0;
   z-index: 2;
 }
-.container.Waiting .Case .List .Element .Name {
+.Content .Case .List .Element .Name {
   width: 100%;
   min-height: 25px;
   line-height: 25px;
   background-color: #ffffff;
 }
-.container.Waiting .Case .List .Element .Name span {
+.Content .Case .List .Element .Name span {
   color: #2e2d3e;
 }
-.container.Waiting .Case .List .Element.Ready .Gamer {
+.Content .Case .List .Element.Ready .Gamer {
   outline-color: #fe6d39;
 }
-.container.Waiting .Case .List .Element.Ready .Name {
+.Content .Case .List .Element.Ready .Name {
   background-color: #fe6d39;
 }
-.container.Waiting .Case .List .Element.Ready .Name span {
+.Content .Case .List .Element.Ready .Name span {
   color: #ffffff;
 }
