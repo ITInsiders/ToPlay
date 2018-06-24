@@ -20,5 +20,10 @@ namespace TP.ML.Entities
         public long Coins { get; set; }
 
         public virtual List<IO_Answer> Answers { get; set; }
+
+        public Gamer()
+        {
+            Answers = new List<IO_Answer>();
+        }
     }
 }

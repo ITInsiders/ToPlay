@@ -219,14 +219,15 @@ namespace TP.PL.Hubs
 
         private void SetResult(ConnectGamer gamer)
         {
+            LanguageDictionary language = new LanguageDictionary();
             GameMechanic game = gamer.Game.Game;
 
             List<JsonResult> results = game.Results().Select(x => new JsonResult() {
-                Feature = x.Feature.Value(LanguageDictionary.GetLanguages()),
+                Feature = x.Feature.Value(language.GetLanguage()),
                 Id = x.Gamer.Id
             }).ToList();
             
-            Clients.Clients(GamersId(gamer)).SetResult(results);
+            Clients.Clients(GamersId(gamer)).SetResult(results, language.Get("Result"));
         }
 
         protected void TimerStart(object Object)
@@ -234,16 +235,19 @@ namespace TP.PL.Hubs
             ConnectGamer gamer = (ConnectGamer)Object;
             GameMechanic game = gamer.Game.Game;
             ConnectGame cgame = gamer.Game;
-            int time = 60;
+            int time = 1;
             do
             {
                 Clients.Clients(GamersId(gamer)).SetTimer(time--);
                 Thread.Sleep(1000);
-            } while (time >= 0 && !game.IsAllAnswer);
+            } while (time > 0 && !game.IsAllAnswer);
 
-            foreach(Gamer item in game.Gamers.Where(x => x.Answers.Count() == game.IndexTask))
+            if (!game.IsAllAnswer)
             {
-                SetAnswer(item.Id, item.Id);
+                foreach (Gamer item in game.Gamers.Where(x => !game.Answers.Any(z => z.SenderId == x.Id)))
+                {
+                    SetAnswer(item.Id, item.Id);
+                }
             }
         }
 

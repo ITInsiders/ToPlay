@@ -16,29 +16,23 @@ namespace TP.BL.IO.Models
 
         public static List<Result> SearchMax(List<Result> helpers)
         {
-            List<Result> results;
+            List<Result> results = new List<Result>();
+            Result Max = null;
 
-            if (helpers.Count == 0)
-                results = new List<Result>();
-            else
+            foreach(Result item in helpers.GroupBy(x => x.Gamer.Id).Select(x => x.First()))
             {
-                List<Result> R = new List<Result>();
-                foreach (Result H in helpers.GroupBy(x => x.Gamer.Id))
-                {
-                    List<Result> r = SearchMax(helpers.Where(x => x.Gamer.Id != H.Gamer.Id).ToList());
+                List<Result> search = helpers.Where(x => x.Gamer.Id != item.Gamer.Id && x.Feature.Id != item.Feature.Id).ToList();
+                List<Result> temp = SearchMax(search);
 
-                    if (R.Sum(x => x.Count) < r.Sum(x => x.Count))
-                        R = r;
-                }
-                foreach (Result H in helpers.GroupBy(x => x.Feature.Id))
+                if (results.Sum(x => x.Count) + (Max?.Count ?? 0) <= temp.Sum(x => x.Count) + item.Count)
                 {
-                    List<Result> r = SearchMax(helpers.Where(x => x.Feature.Id != H.Feature.Id).ToList());
-
-                    if (R.Sum(x => x.Count) < r.Sum(x => x.Count))
-                        R = r;
+                    results = temp;
+                    Max = item;
                 }
-                results = R;
             }
+
+            if (Max != null)
+                results.Add(Max);
 
             return results;
         }

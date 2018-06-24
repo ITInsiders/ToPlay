@@ -1,6 +1,7 @@
 ﻿@using TP.PL.Helpers;
 @{
     PageInfo Info = (PageInfo)ViewBag.Info;
+    Info.Language.SetLanguage(TP.ML.Helper.Languages.Ru);
     Layout = Info.LayoutHref;
 }
 <script>var Id = @ViewBag.Id;</script>
@@ -54,7 +55,7 @@
             <span>@Info.Language.Get("characteristic")</span>
         </div>
         <div class="Text">
-            <span>@Info.Language.Get("you can persuade anyone")</span>
+            <span></span>
         </div>
     </div>
 </div>

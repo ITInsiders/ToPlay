@@ -20,7 +20,7 @@ function Ready() {
 
     Data.Gamer = $("#Template .Gamer").clone();
     Data.Gamer.Answer = $("#Template .Answer").clone();
-    Data.Gamer.Characteristic = $("#Template .Gamer .Characteristic").clone();
+    Data.Gamer.Characteristic = $("#Template .Characteristic").clone();
 
     $("#Data").remove();
     $("#Template").remove();

@@ -35,7 +35,7 @@ namespace TP.BL.IO.Actions
             List<IO_Task> result = new List<IO_Task>();
 
             int Count = tasks.Count();
-            for (int i = 0; i < Count && i < 9; ++i)
+            for (int i = 0; i < Count && i < 5; ++i)
             {
                 int Index = 0;
                 do { Index = R.Next(0, Count); } while (result.Any(x => x.Id == tasks[Index].Id));
@@ -59,6 +59,7 @@ namespace TP.BL.IO.Actions
             this.isRun = false;
             this.isEnd = false;
             this.Game = new IO_GameSession();
+            this.Game.Game = Service<Game>.I.Get(2);
             AddTasks();
         }
 
@@ -121,12 +122,14 @@ namespace TP.BL.IO.Actions
                         Recipient = Recipient,
                         RecipientId = RecipientId,
                         Task = Task,
-                        TaskId = Task.Id
+                        TaskId = Task.Id,
+                        GameSession = Game
                     };
 
                     Sender.Answers.Add(answer);
                     Recipient.Answers.Add(answer);
                     Task.Answers.Add(answer);
+                    Game.Answers.Add(answer);
                 } else
                 {
                     answer.Recipient = Recipient;
@@ -156,15 +159,28 @@ namespace TP.BL.IO.Actions
 
             foreach (Gamer gamer in Gamers)
             {
-                List<IO_Answer> answers = gamer.Answers.Where(x => x.RecipientId == gamer.Id).ToList();
+                List<IO_Answer> answers = gamer.Answers
+                    .Where(x => x.RecipientId == gamer.Id)
+                    .GroupBy(x => x.TaskId).Select(x => x.First()).ToList();
+
                 List<IO_Attribute> attributes = answers
-                    .SelectMany(x => x.Task.TaskAttributes.Select(z => z.Attribute)).ToList();
+                    .SelectMany(x => x.Task.TaskAttributes.Select(z => z.Attribute))
+                    .GroupBy(x => x.Id).Select(x => x.First()).ToList();
+
                 List<IO_Feature> features = Service<IO_Feature>.I
                     .Get(x => x.FeatureAttributes.All(z => attributes.Any(a => a.Id == z.AttributeId)))
                     .OrderByDescending(x => x.FeatureAttributes.Count()).ToList();
 
-                foreach (IO_Feature feature in features)
+                if (features.Count() > 0)
+                {
+                    foreach (IO_Feature feature in features)
+                        results.Add(new Result() { Gamer = gamer, Feature = feature, Count = feature.FeatureAttributes.Count() });
+                }
+                else
+                {
+                    IO_Feature feature = Service<IO_Feature>.I.Get(12);
                     results.Add(new Result() { Gamer = gamer, Feature = feature, Count = feature.FeatureAttributes.Count() });
+                }
             }
 
             results = Result.SearchMax(results);
@@ -176,6 +192,7 @@ namespace TP.BL.IO.Actions
                 gamer.FeatureId = R.Feature.Id;
             }
 
+            Game.End = DateTime.Now;
             Service<IO_GameSession> service = Service<IO_GameSession>.I;
             service.Create(Game);
             service.SaveFromDataBase();

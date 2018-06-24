@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201806231942542_M.Designer.cs">
       <DependentUpon>201806231942542_M.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806241016106_M1.cs" />
+    <Compile Include="Migrations\201806241016106_M1.Designer.cs">
+      <DependentUpon>201806241016106_M1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFUnitOfWork.cs" />
@@ -80,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806231942542_M.resx">
       <DependentUpon>201806231942542_M.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806241016106_M1.resx">
+      <DependentUpon>201806241016106_M1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

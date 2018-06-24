@@ -13,6 +13,7 @@ namespace TP.ML.IOEntities
     public class IO_GameSession : GameSession
     {
         public virtual List<IO_GameTask> GameTasks { get; set; }
+        public virtual List<IO_Answer> Answers { get; set; }
 
         protected override object Child => this;
 
@@ -20,8 +21,10 @@ namespace TP.ML.IOEntities
 
         public IO_GameSession()
         {
+            GameId = 2;
             GameTasks = new List<IO_GameTask>();
             GameGamers = new List<GameGamer>();
+            Answers = new List<IO_Answer>();
         }
     }
 }

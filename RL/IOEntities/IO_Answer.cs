@@ -30,6 +30,12 @@ namespace TP.ML.IOEntities
         public long TaskId { get; set; }
         public virtual IO_Task Task { get; set; }
 
+        [Key]
+        [Column(Order = 4)]
+        [ForeignKey("GameSession")]
+        public long GameSessionId { get; set; }
+        public virtual IO_GameSession GameSession { get; set; }
+
         public int Coins { get; set; }
     }
 }

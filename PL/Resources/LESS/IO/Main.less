@@ -90,6 +90,43 @@
                                 transition: .5s;
                             }
                         }
+
+                        .Characteristic {
+                            position: absolute;
+                            bottom: 40px;
+                            left: 5%;
+                            height: 40%;
+                            width: 90%;
+                            background-color: @basecolor-darkgrayblue;
+                            overflow: hidden;
+                            outline: 2px solid @basecolor-white;
+
+                            .Title {
+                                display: inline-block;
+                                float: left;
+                                width: 100%;
+                                height: 20px;
+                                line-height: 20px;
+                                background-color: @basecolor-white;
+
+                                span {
+                                    color: @basecolor-darkgrayblue;
+                                }
+                            }
+
+                            .Text {
+                                display: inline-block;
+                                float: left;
+                                width: 100%;
+                                max-height: calc(~"100% - 20px");
+                                overflow-x: hidden;
+                                overflow-y: auto;
+                            }
+
+                            span {
+                                font-size: 14px;
+                            }
+                        }
                     }
 
                     .Name {
@@ -198,105 +235,6 @@
                     .Name {
                         border-top-color: @basecolor-green;
                         background-color: @basecolor-green;
-
-                        span {
-                            color: @basecolor-white;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    .Case {
-        margin-top: 15px;
-
-        .Block {
-            padding: 20px 15px 5px 15px;
-        }
-
-        .List {
-            padding: 0 4px;
-
-            .Element {
-                padding: 0 5px;
-                margin: 5px 0;
-
-                * {
-                    transition: .5s ease-in-out;
-                }
-
-                .Gamer {
-                    position: relative;
-                    background-color: @basecolor-darkgrayblue;
-                    background-position-x: center;
-                    background-position-y: top;
-                    background-repeat: no-repeat;
-                    background-size: 100%;
-                    overflow: hidden;
-                    outline: 3px solid @basecolor-white;
-                    padding-bottom: 25px;
-
-                    &:hover {
-                        background-size: 150%;
-                    }
-
-                    &:before {
-                        content: "";
-                        display: block;
-                        padding-top: 100%;
-                    }
-
-                    &:after {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        content: "";
-                        display: block;
-                        width: 100%;
-                        height: calc(~"100% - 25px");
-                        box-shadow: 0 0 0 500px @basecolor-orange;
-                        border-radius: 0;
-                        transition: .5s ease-in-out;
-                    }
-
-                    &:hover:after, &.Select:after {
-                        top: 5%;
-                        left: 5%;
-                        width: 90%;
-                        height: calc(~"90% - 25px");
-                        border-radius: 50%;
-                    }
-
-                    .Name {
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-                        z-index: 2;
-                    }
-                }
-
-                .Name {
-                    width: 100%;
-                    min-height: 25px;
-                    line-height: 25px;
-                    background-color: @basecolor-white;
-
-                    span {
-                        color: @basecolor-darkgrayblue;
-                    }
-                }
-
-
-
-                &.Ready {
-                    .Gamer {
-                        outline-color: @basecolor-orange;
-                    }
-
-                    .Name {
-                        background-color: @basecolor-orange;
 
                         span {
                             color: @basecolor-white;

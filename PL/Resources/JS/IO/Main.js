@@ -17,17 +17,21 @@ function SendSelect(element) {
         element.id = "Change";
     
     var Gamer = $(".Gamer.Select");
-    
-    var Id = Gamer.attr("key");
-    Hub.server.setAnswer(Id);
 
-    $(".Gamer.SelectSave").removeClass("SelectSave");
-    Gamer.addClass("SelectSave");
+    if (Gamer.is("*") != null) {
+        var Id = Gamer.attr("key");
+        Hub.server.setAnswer(Id);
+
+        $(".Gamer.SelectSave").removeClass("SelectSave");
+        Gamer.addClass("SelectSave");
+    } else {
+        element.id = "Send";
+    }
 }
 function ClearGamer(Id = null) {
     var Gamer = Id != null ? $(`#Gamer${Id}`) : $(".Gamer");
     $("#Gamers").removeClass(["Waiting", "Task", "Answer", "Result"]);
-    Gamer.removeClass(["Select", "SelectSave"]);
+    Gamer.removeClass(["Select", "SelectSave", "Ready"]);
     Gamer.find(".Answer").remove();
     Gamer.find(".Result").remove();
     return Gamer;
@@ -89,8 +93,6 @@ function SetTask(JsonTask) {
 
     $("#Title span").text(JsonTask.Value);
 
-    $(".Gamer").removeClass("Ready");
-
     $("#Info").empty()
         .append(Data.Div.Timer.clone());
     $("#Buttons").empty()
@@ -134,7 +136,8 @@ function SetAnswers(JsonAnswers) {
 function SetTimer(Time) {
     $("#Timer .Time").text(Time);
 }
-function SetResult(Results) {
+function SetResult(Results, Title) {
+    console.log(Results);
     ClearGamer();
     $("#Gamers").addClass("Result");
 
@@ -142,10 +145,15 @@ function SetResult(Results) {
     $("#Buttons").empty()
         .append(Data.Button.Lose.clone());
 
-    $("#Lose").attr("id", "Exit")
+    $("#Lose").attr("id", "Exit");
+    $("#Title span").text(Title);
 
     Results.forEach(function (v, i) {
-        $(`#Gamer${v.Id} .Characteristic .Text span`).text(v.Feature);
+        var Gamer = $(`#Gamer${v.Id}`),
+            Image = Gamer.find(".Info .Image");
+
+        Image.append(Data.Gamer.Characteristic.clone());
+        Image.find(`.Characteristic .Text span`).text(v.Feature);
     });
 }
 function Auth() {
